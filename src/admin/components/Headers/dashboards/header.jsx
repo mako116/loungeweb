@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
  import { HiOutlineLogout } from "react-icons/hi";
    import Avatar from "./Avatar";
-import { Box, Button, Image, Input, InputGroup } from "@chakra-ui/react";
-import Notfyimage from '../../assets/btn.png'
+import { Box, Button, Image, Input, InputGroup, Text } from "@chakra-ui/react";
+import Notfyimage from '../../../../assets/btn.png'
 import { BiSearch } from "react-icons/bi";
 
 const Header = ({ sidebarOpen, setSidebarOpen }) => {
@@ -11,6 +11,21 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null); // State to track which dropdown is open
    const navigate = useNavigate();
 
+     const location = useLocation();
+
+  // Map routes to header titles
+  const headerTitles = {
+    "/admin/dashboard": "Dashboard",
+    "/admin/directory": "Directory",
+    "/admin/learning-hub": "Learning Hub",
+    "/admin/mentoring": "Mentoring",
+    "/admin/community": "Community",
+    "/admin/settings": "Settings",
+    "/admin/logout": "Logout",
+  };
+
+  // Find the title based on current pathname
+  const contents = headerTitles[location.pathname] || "Admin Panel";
   const dropdownOptions = [
     
     {
@@ -33,7 +48,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   return (
-    <Box m={4} className="mt-[20px] top-5 flex flex-col z-[51] bg-[#FDFDFD] my-[12px]">
+    <Box p={4} bg={'#F5F6FA'} className="mt-[20px] top-5 flex flex-col z-[51]  my-[12px]">
       <div className="flex flex-grow items-center justify-between py-[12px] px-4  md:px-6 2xl:px-11">
         {/* Sidebar Toggle Button */}
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
@@ -43,7 +58,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               e.stopPropagation();
               setSidebarOpen(!sidebarOpen);
             }}
-            className="block rounded-sm bg-white p-1.5 shadow-sm"
+            className="block rounded-sm  p-1.5 shadow-sm"
           >
             <svg
               className="h-10 w-10 fill-current p-2 border rounded-full text-blue"
@@ -61,10 +76,10 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         
 
         {/* Search Bar */}
-        <div className="hidden sm:block w-[600px]">
-           <InputGroup  fontFamily={'inter'}  startElement={<BiSearch />}>
-            <Input h={{base:20,md:50}} rounded={10} placeholder="Search your course here...." />
-          </InputGroup>
+        <div className="  ">
+            <Text>
+            {contents}
+            </Text>
         </div>
 
         {/* Header Actions */}

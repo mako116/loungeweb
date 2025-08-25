@@ -25,6 +25,10 @@ import { OrganizationTopTabs } from './organization/features/LearningHub/TopTabP
 import { OrganizationMentoring } from './organization/features/mentoring/Mentoring';
 import { OrganizationCommunity } from './organization/features/community/Community';
 import { OrganizationSettingsTab } from './organization/features/setting/SettingsTabpanel';
+import AdminLayout from './admin/components/Layout/AppLayout';
+import { AdminHome } from './admin/features/home/Homes';
+import AdminProfileDetails from './admin/features/home/ProfileDetails';
+import AdminPostHistory from './admin/features/home/postHistory';
  
 function App() {
   // users
@@ -75,6 +79,27 @@ function App() {
               <Route path="/organization/mentoring" element={<OrganizationMentoring />} />
               <Route path="/organization/community" element={<OrganizationCommunity />} />
               <Route path="/organization/settings" element={<OrganizationSettingsTab />} />
+
+            {/* Admin */}
+            </Route>
+
+            {/* Admin */}
+            <Route
+            path='/admin'
+              element={
+                // <ProtectedRoute>
+                  <AdminLayout />
+                // </ProtectedRoute>
+              } 
+            >
+              <Route path="/admin/dashboard" index element={<AdminHome />} />
+              <Route path="/admin/profile/:id" element={<AdminProfileDetails />} />
+              <Route path="/admin/post-history" element={<AdminPostHistory />} />
+              {/* <Route path="/admin/directory" element={<OrganizationDirectory />} />
+              <Route path="/admin/learning-hub" element={<OrganizationTopTabs />} />
+              <Route path="/admin/mentoring" element={<OrganizationMentoring />} />
+              <Route path="/admin/community" element={<OrganizationCommunity />} />
+              <Route path="/admin/settings" element={<OrganizationSettingsTab />} /> */}
 
             {/* Admin */}
             </Route>

@@ -6,16 +6,14 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
-  
 } from "@chakra-ui/react";
 import { IoMdClock, IoMdClose, IoMdSettings } from "react-icons/io";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { LuCalendarDays } from "react-icons/lu";
 import { BiLogOut, BiSolidCopyAlt } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
-import logo from "../../assets/logos.png";
-import { Balance } from "../../assets/Balance";
+import logo from "../../../assets/logos.png";
+import { Balance } from "../../../assets/Balance";
 
 const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
   const history = useNavigate();
@@ -70,12 +68,12 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
   const allItems = useMemo(
     () => [
       { text: "Dashboard", link: "/admin/dashboard", icon: IoMdClock },
-      { text: "Directory", link: "/admin/inbox", icon: RiErrorWarningLine },
-      { text: "Learning Hub", link: "/admin/transactions", icon: LuCalendarDays },
-      { text: "Mentoring", link: "/admin/payout", icon: BiSolidCopyAlt },
-      { text: "Community", link: "/admin/users", icon: FaUsers },
+      { text: "Directory", link: "/admin/directory", icon: RiErrorWarningLine },
+      { text: "Learning Hub", link: "/admin/learning-hub", icon: LuCalendarDays },
+      { text: "Mentoring", link: "/admin/mentoring", icon: BiSolidCopyAlt },
+      { text: "Community", link: "/admin/community", icon: FaUsers },
       { text: "Settings", link: "/admin/settings", icon: IoMdSettings },
-      { text: "Logout", link: "Logout", icon: BiLogOut },
+      { text: "Logout", link: "/admin/Logout", icon: BiLogOut },
     ],
     []
   );
@@ -160,7 +158,7 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
         shadow="md"
         borderRight="1px solid"
         borderColor={"gray.200"}
-        bg={"#FDFDFD"}
+        bg={"#fff"}
         transform={{
           base: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
           lg: "translateX(0)",
@@ -228,7 +226,7 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
             px={4}
             align="center"
             cursor="pointer"
-            rounded="md"
+            rounded="30px"
             bg={activeMainIndex === mainIndex ? "gray.800" : "transparent"}
             color={
             isLogout

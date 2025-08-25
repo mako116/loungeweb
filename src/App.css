@@ -54,6 +54,39 @@
   font-style: normal;
 }
 
+
+/* Outfit */
+@font-face {
+  font-family: "OutfitRegular";
+  src: url("./assets/font/outfit/OutfitRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Lato Medium */
+@font-face {
+  font-family: "OutfitMedium";
+  src: url("./assets/font/outfit/OutfitMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Semi Bold */
+@font-face {
+  font-family: "OutfitSemiBold";
+  src: url("./assets/font/outfit/OutfitSemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+/* bold */
+@font-face {
+  font-family: "OutfitBold";
+  src: url("./assets/font/outfit/OutfitBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
 /* Hide scrollbar in webkit browsers */
 .scroll-container::-webkit-scrollbar {
     display: none;

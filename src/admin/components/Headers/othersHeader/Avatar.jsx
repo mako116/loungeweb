@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-  import Avatars from "../../assets/Profile.png";
+  import Avatars from "../../../assets/Profile.png";
 import { Box, Button, Image, Text } from "@chakra-ui/react";
-import Notfyimage from '../../assets/Notification.png'
+import Notfyimage from '../../../assets/Notification.png'
 // import { AuthContext } from "../../../context/AuthContext";
 
 const Avatar = ({ options }) => {
@@ -30,7 +30,7 @@ const Avatar = ({ options }) => {
          </Button>
          <Box py={2} px={6} rounded={50} border={'6px solid #F3F2F3'} className="flex-col flex px-2 items-center border">
           {/* <span>{userDetails?.name||'Admin'}</span> */}
-          <Text fontFamily={'inter'} fontSize={{base:'12px',md:'16px'}}>Mentor</Text>
+          <Text fontFamily={'inter'} fontSize={{base:'12px',md:'16px'}}>Mentors</Text>
         </Box>
         <img src={Avatars} alt="Avatar" className="object-cover w-10 h-10 rounded-full" />
        
