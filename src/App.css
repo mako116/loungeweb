@@ -1,0 +1,113 @@
+@import "tailwindcss";
+/* global.css */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+ /* Lato Regular */
+@font-face {
+  font-family: "LatoRegular";
+  src: url("./assets/font/lato/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Lato Medium */
+@font-face {
+  font-family: "LatoMedium";
+  src: url("./assets/font/lato/Lato-Italic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Lato Bold */
+@font-face {
+  font-family: "LatoBold";
+  src: url("./assets/font/lato/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* inter */
+@font-face {
+  font-family: "InterRegular";
+  src: url("./assets/font/inter/Inter-Regular.otf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Lato Medium */
+@font-face {
+  font-family: "InterMedium";
+  src: url("./assets/font/inter/Inter-Medium.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Lato Bold */
+@font-face {
+  font-family: "InterBold";
+  src: url("./assets/font/inter/Inter-Bold.otf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Hide scrollbar in webkit browsers */
+.scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Optional: Add overflow styling for the container */
+  .scroll-container {
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    scrollbar-width: none;  /* For Firefox */
+  }
+
+  
+  
+
+  /* Hide the default checkbox */
+.custom-checkbox-input {
+  background-color: black;
+  border-color: black;
+  display: none;
+}
+
+/* Style the label as the custom checkbox */
+.custom-checkbox-label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* When the checkbox is checked, change the background and border */
+.custom-checkbox-input:checked + .custom-checkbox-label {
+  background-color: black;
+  border-color: black;
+}
+
+/* Create the checkmark */
+.custom-checkbox-input:checked + .custom-checkbox-label::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* Optional: Add hover effect for the checkbox */
+.custom-checkbox-label:hover {
+  border-color: #888;
+}
