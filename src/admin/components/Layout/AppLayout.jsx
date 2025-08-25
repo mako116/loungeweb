@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom';
 import SideBarItem from './SideBar';
 // import Header from '../Headers/dashboard/header';
 import { Box } from '@chakra-ui/react';
-import Header from '../Headers/dashboards/header';
- 
+  
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -20,12 +19,7 @@ const AdminLayout = () => {
 				{/* <!-- ===== Sidebar End ===== --> */}
 
  				<div className=" flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-					{/* <!-- ===== Header Start ===== --> */}
-					<Header
-						sidebarOpen={sidebarOpen}
-						setSidebarOpen={setSidebarOpen}
-					/>
-					 
+ 					 
 					<main className='bg-[#F5F6FA]"'>
 						<Box 
 						 bg={'#F5F6FA'}

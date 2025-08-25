@@ -105,8 +105,7 @@ function App() {
             </Route>
 
             {/* Public routes */}
-            {/* <Route path="/onboarding" element={<OnboardingScreen />} /> */}
-            <Route path="/login" element={<Login />} />
+             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/otp" element={<Otp />} />
             <Route path="/forgot-password" element={<ForgotEmail />} />
