@@ -27,8 +27,8 @@ const Avatar = ({ options }) => {
       <Box   className="cursor-pointer md:gap-[20px] flex items-center" onClick={toggleDropdown}>
          <Button bg={'transparent'}>
            <Image
-            w={{base:10,md:20}} 
-              h={{base:10,md:20}} 
+           w={{base:8,md:10}} 
+        h={{base:8,md:10}}  
            src={Notfyimage} alt="Lounge Logo" className="object-cover w-[46px] h-[46px] rounded-full" />
          </Button>
          <Box py={2} px={{base:2,md:6}} rounded={{base:10,md:50}} border={{base:'2px solid #F3F2F3',md:'6px solid #F3F2F3'}} className="flex-col flex px-2 items-center border">

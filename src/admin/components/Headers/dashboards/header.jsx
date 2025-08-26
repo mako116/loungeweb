@@ -92,8 +92,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           
            <Button bg={'transparent'}>
               <Image 
-              w={{base:10,md:20}} 
-              h={{base:10,md:20}} 
+              w={{base:8,md:10}} 
+        h={{base:8,md:10}} 
               src={Notfyimage} 
               alt="Lounge Logo" 
               className="object-cover  rounded-full" />
