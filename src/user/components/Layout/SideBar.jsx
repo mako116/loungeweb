@@ -8,8 +8,8 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { IoMdClock, IoMdClose, IoMdSettings } from "react-icons/io";
-import { RiErrorWarningLine } from "react-icons/ri";
-import { LuCalendarDays } from "react-icons/lu";
+import { RiErrorWarningLine, RiHome5Fill, RiInboxArchiveLine } from "react-icons/ri";
+import { LuCalendarDays, LuFolderOpenDot } from "react-icons/lu";
 import { BiLogOut, BiSolidCopyAlt } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import logo from "../../../assets/logos.png";
@@ -67,9 +67,9 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
 
   const allItems = useMemo(
     () => [
-      { text: "Dashboard", link: "/dashboard", icon: IoMdClock },
-      { text: "Directory", link: "/directory", icon: RiErrorWarningLine },
-      { text: "Learning Hub", link: "/learning-hub", icon: LuCalendarDays },
+      { text: "Dashboard", link: "/dashboard", icon: RiHome5Fill },
+      { text: "Directory", link: "/directory", icon: RiInboxArchiveLine },
+      { text: "Learning Hub", link: "/learning-hub", icon: LuFolderOpenDot },
       { text: "Mentoring", link: "/mentoring", icon: BiSolidCopyAlt },
       { text: "Community", link: "/community", icon: FaUsers },
       { text: "Settings", link: "/settings", icon: IoMdSettings },

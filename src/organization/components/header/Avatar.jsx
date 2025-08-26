@@ -26,13 +26,13 @@ const Avatar = ({ options }) => {
     <div className="relative flex items-center gap-3 cursor-pointer" ref={dropdownRef}>
       <div className="cursor-pointer gap-[20px] flex items-center" onClick={toggleDropdown}>
          <Button bg={'transparent'}>
-           <Image src={Notfyimage} alt="Lounge Logo" className="object-cover w-[46px] h-[46px] rounded-full" />
+           <Image w={{base:29,lg:46}} src={Notfyimage} alt="Lounge Logo" className="object-cover   rounded-full" />
          </Button>
-         <Box py={2} px={6} rounded={50} border={'6px solid #F3F2F3'} className="flex-col flex px-2 items-center border">
+         <Box py={2} px={{base:3,md:6}} rounded={{base:20,lg:50}} border={'6px solid #F3F2F3'} className="flex-col flex px-2 items-center border">
           {/* <span>{userDetails?.name||'Admin'}</span> */}
-          <Text fontFamily={'inter'} fontSize={{base:'12px',md:'16px'}}>Mentors</Text>
+          <Text fontFamily={'InterRegular'} fontSize={{base:'12px',md:'16px'}}>Mentors</Text>
         </Box>
-        <img src={Avatars} alt="Avatar" className="object-cover w-10 h-10 rounded-full" />
+        <Image w={{base:6,lg:10}} h={{base:6,lg:10}} src={Avatars} alt="Avatar" className="object-cover  rounded-full" />
        
       </div>
 

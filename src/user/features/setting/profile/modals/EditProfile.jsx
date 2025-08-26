@@ -37,7 +37,7 @@ export const EditProfile = ({ isOpen, onClose }) => {
           maxW={{base:'sm',md:"xl"}}>
             
          <Fieldset.Root size={{base:'sm',md:"lg"}}  >
-         <Stack>
+         <Stack> 
           <Fieldset.Legend
           fontWeight={'400'}
            fontSize={{base:15,md:20}}

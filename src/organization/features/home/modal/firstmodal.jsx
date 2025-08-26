@@ -28,7 +28,7 @@ export const FirstModal = ({ isOpen, onClose,onStartCreating  }) => {
         <Text
         fontWeight={'400'}
         pt={10}
-           fontSize={{base:28,md:40}}
+           fontSize={{base:28,lg:40}}
            fontFamily="LatoRegular"
            color={'#2B362F'}
         >
@@ -38,7 +38,7 @@ export const FirstModal = ({ isOpen, onClose,onStartCreating  }) => {
         <Text
          fontWeight={'400'}
           pt={5}
-           fontSize={{base:16,md:20}}
+           fontSize={{base:16,lg:20}}
            fontFamily="LatoRegular"
            color={'#A4A9AE'}
            maxW={450}
@@ -51,7 +51,7 @@ export const FirstModal = ({ isOpen, onClose,onStartCreating  }) => {
           {/* Button */}
             <Button mx={'auto'} onClick={onStartCreating} 
              p={7}  
-             fontSize={{base:17,md:20}}
+             fontSize={{base:17,lg:20}}
              rounded={10}
              bg={'#2B362F'} >
             Start Creating

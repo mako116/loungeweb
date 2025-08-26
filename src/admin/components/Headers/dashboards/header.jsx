@@ -76,8 +76,13 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         
 
         {/* Search Bar */}
-        <div className="  ">
-            <Text>
+        <div className=" md:block hidden">
+            <Text 
+            color={'#202020'}
+            fontFamily={'InterMedium'}
+            fontSize={{base:16,md:24}}
+            fontWeight={'500'}
+            >
             {contents}
             </Text>
         </div>
@@ -86,7 +91,12 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="flex items-center gap-5">
           
            <Button bg={'transparent'}>
-              <Image src={Notfyimage} alt="Lounge Logo" className="object-cover w-[46px] h-[46px] rounded-full" />
+              <Image 
+              w={{base:10,md:20}} 
+              h={{base:10,md:20}} 
+              src={Notfyimage} 
+              alt="Lounge Logo" 
+              className="object-cover  rounded-full" />
             </Button>
            
           {/* Avatar Dropdown */}

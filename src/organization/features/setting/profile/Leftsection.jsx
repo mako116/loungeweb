@@ -11,7 +11,15 @@ import { EditProfile } from './modals/EditProfile';
 import { FirstModal } from '../../home/modal/firstmodal';
 
 export const LeftSectionProfile = () => {
-
+   
+   const [isOpen, setIsOpen] = useState(false);
+   
+    const handleCardClick = () => {
+       setIsOpen(true);
+    };
+      const handleClose = () => {
+      setIsOpen(false);
+     };
       
     // Dummy Data
     const cardData = [
@@ -259,7 +267,10 @@ export const LeftSectionProfile = () => {
         </Box>
         </Box>
 
-       
+        <EditProfile
+                 isOpen={isOpen}
+                 onClose={handleClose}
+               />
     </Box>
   )
 }
