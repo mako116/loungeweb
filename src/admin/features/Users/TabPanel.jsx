@@ -3,9 +3,18 @@ import "react-datepicker/dist/react-datepicker.css"; // Import styles
 import { Members } from "./MentorApplication";
 import { Organization } from "./NewOrganization";
 import { FaUserPlus } from "react-icons/fa";
+import { useState } from "react";
+import { CreateNewUser } from "./modal/CreateUser";
 
 export const DashboardTabpanel = () => {
- 
+      const [isOpen, setIsOpen] = useState(false);
+
+    const handleAddUser = () => {
+       setIsOpen(true);
+     };
+      const handleClose = () => {
+      setIsOpen(false);
+      };
   return (
     <Tabs.Root bg="#F5F6FA" defaultValue="Members">
       <Flex alignItems={'center'} pt={{base:1,md:5}} justifyContent={"space-between"}>
@@ -34,6 +43,7 @@ export const DashboardTabpanel = () => {
               rounded={20}
               color={"#333"}
               bg="#fff"
+              onClick={handleAddUser}
               _hover={{ bg: "#f0f0f0" }}
             >
               <HStack spacing={2}>
@@ -50,6 +60,10 @@ export const DashboardTabpanel = () => {
           
       </Flex>
 
+      <CreateNewUser 
+        isOpen={isOpen}
+        onClose={handleClose}
+      />
       {/* Tab Contents */}
       <Tabs.Content value="Members">
         <Members />

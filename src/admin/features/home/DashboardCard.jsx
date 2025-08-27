@@ -2,7 +2,7 @@ import {Grid, HStack  } from "@chakra-ui/react";
 import logo from "../../../assets/Icon.png";
  
 import { ReusableCard } from "../../components/Card/ReusableCard";
-import { IoIosTrendingUp } from "react-icons/io";
+import { IoIosTrendingDown, IoIosTrendingUp } from "react-icons/io";
 
 export function DashboardCard() {
   return (
@@ -33,9 +33,11 @@ export function DashboardCard() {
     <ReusableCard
     title={'Total users'}
      description={'40,689'}
+      color={'#00B69B'}
+    arrows={<IoIosTrendingDown />}
      image={logo}
      rate={'8.5%'}
-     current={'up'}
+     current={'down'}
      timestamp={'yesterday'}
     />
     <ReusableCard
