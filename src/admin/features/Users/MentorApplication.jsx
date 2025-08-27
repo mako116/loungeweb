@@ -1,17 +1,17 @@
 import { Box, Menu, Button, Portal, HStack, Text } from "@chakra-ui/react";
-import { BottomTable } from "./BottomTable";
+import { BottomTable } from "../../components/BottomTable";
 import { useState } from "react";
 import img from "../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-export const MentorApplication = () => {
+export const Members = () => {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowActions, setRowActions] = useState({});
   const navigate = useNavigate();
-
+ 
   const tableData = [
     { UserId: "#38734", Name: "Jamal", image: img, Profession: "Web Developer", Experience: "3", Timestamp: "09/08/24, 12:00pm" },
     { UserId: "#12233", Name: "Lydia", image: img, Profession: "UI Designer", Experience: "5", Timestamp: "09/08/24, 12:10pm" },
@@ -68,15 +68,15 @@ export const MentorApplication = () => {
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Approve", "green.500", <IoMdCheckboxOutline boxSize={3} />)}
                     >
-                      <IoMdCheckboxOutline /> Approve
+                      <IoMdCheckboxOutline /> Send mail
                     </Menu.Item>
-                    <Menu.Item color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
-                    <Menu.Item
+                    <Menu.Item  color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
+                    <Menu.Item 
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Decline", "red.500", <MdOutlineCancel boxSize={3} />)}
                     >
-                      <MdOutlineCancel /> Decline
-                    </Menu.Item>
+                      <MdOutlineCancel /> Deactivate
+                     </Menu.Item>
                   </Menu.Content>
                 </Menu.Positioner>
               </Portal>
@@ -88,7 +88,7 @@ export const MentorApplication = () => {
   };
 
   return (
-    <Box h="100vh" bg="#F5F6FA" p={6}>
+    <Box w={'full'} bg="#F5F6FA" p={{base:1,md:6}}>
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}

@@ -1,5 +1,5 @@
 import { Box, Menu, Button, Portal, HStack, Text } from "@chakra-ui/react";
-import { BottomTable } from "./BottomTable";
+import { BottomTable } from "../../components/BottomTable";
 import { useState } from "react";
 import img from "../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
@@ -67,7 +67,7 @@ export const NewOrganization = () => {
                     <Menu.Item
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Approve", "green.500", <IoMdCheckboxOutline boxSize={3} />)}
-                    >
+                    > 
                       <IoMdCheckboxOutline /> Approve
                     </Menu.Item>
                     <Menu.Item color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
@@ -88,7 +88,7 @@ export const NewOrganization = () => {
   };
 
   return (
-    <Box h="100vh" bg="#F5F6FA" p={6}>
+    <Box  bg="#F5F6FA" p={6}>
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}

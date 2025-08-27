@@ -31,7 +31,7 @@ export const ReusableCard = ({arrows,description,title,image,rate,current,timest
        fontFamily={'nunitoSemiBold'} 
        color={'#606060'}
        flexDirection={'row'} alignItems={'center'}>
-      <Box color={color}>{arrows}</Box>   <Text color={color}>{rate}</Text> <Text  >{current}</Text> from  <Text>{timestamp}   </Text>    
+      <Box color={color}>{arrows}</Box> <Text color={color}>{rate}</Text> <Text  >{current}</Text> from  <Text>{timestamp}   </Text>    
        </Card.Footer>
     </Card.Root>
   )

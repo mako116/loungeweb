@@ -1,14 +1,12 @@
 import { Box } from "@chakra-ui/react";
-import { DashboardCard } from "./DashboardCard";
-import { BottomTable } from "../../components/BottomTable";
 import { DashboardTabpanel } from "./TabPanel";
 
-export const AdminHome = () => {
+export const UsersHome = () => {
   
   
   return (
     <Box h="100vh" bg="#F5F6FA" p={6}>
-      <DashboardCard/>
+      {/* <DashboardCard/> */}
       <DashboardTabpanel/>
     </Box>
   );

@@ -25,6 +25,8 @@ export function DashboardCard() {
      description={'40,689'}
      image={logo}
      rate={'8.5%'}
+      color={'#00B69B'}
+    arrows={<IoIosTrendingUp />}
      current={'up'}
      timestamp={'yesterday'}
     />

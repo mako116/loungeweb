@@ -16,7 +16,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   // Map routes to header titles
   const headerTitles = {
     "/admin/dashboard": "Dashboard",
-    "/admin/directory": "Directory",
+    "/admin/users": "Users",
     "/admin/learning-hub": "Learning Hub",
     "/admin/mentoring": "Mentoring",
     "/admin/community": "Community",

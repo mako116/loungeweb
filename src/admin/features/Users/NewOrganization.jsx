@@ -5,8 +5,8 @@ import img from "../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
- 
-export const RewardReq = () => {
+
+export const Organization = () => {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowActions, setRowActions] = useState({});
@@ -67,7 +67,7 @@ export const RewardReq = () => {
                     <Menu.Item
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Approve", "green.500", <IoMdCheckboxOutline boxSize={3} />)}
-                    >
+                    > 
                       <IoMdCheckboxOutline /> Approve
                     </Menu.Item>
                     <Menu.Item color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
@@ -88,7 +88,7 @@ export const RewardReq = () => {
   };
 
   return (
-    <Box   bg="#F5F6FA" p={6}>
+    <Box  bg="#F5F6FA" p={{base:1,md:6}}>
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}

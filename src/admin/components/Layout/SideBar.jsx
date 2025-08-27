@@ -11,7 +11,7 @@ import { IoMdClock, IoMdClose, IoMdSettings } from "react-icons/io";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { LuCalendarDays } from "react-icons/lu";
 import { BiLogOut, BiSolidCopyAlt } from "react-icons/bi";
-import { FaUsers } from "react-icons/fa";
+import { FaUser, FaUsers } from "react-icons/fa";
 import logo from "../../../assets/logos.png";
 import { Balance } from "../../../assets/Balance";
 
@@ -68,7 +68,7 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
   const allItems = useMemo(
     () => [
       { text: "Dashboard", link: "/admin/dashboard", icon: IoMdClock },
-      { text: "Directory", link: "/admin/directory", icon: RiErrorWarningLine },
+      { text: "Users", link: "/admin/users", icon: FaUser },
       { text: "Learning Hub", link: "/admin/learning-hub", icon: LuCalendarDays },
       { text: "Mentoring", link: "/admin/mentoring", icon: BiSolidCopyAlt },
       { text: "Community", link: "/admin/community", icon: FaUsers },

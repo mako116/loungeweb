@@ -5,13 +5,13 @@ import img from "../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
- 
-export const RewardReq = () => {
+
+export const MentorApplication = () => {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowActions, setRowActions] = useState({});
   const navigate = useNavigate();
-
+ 
   const tableData = [
     { UserId: "#38734", Name: "Jamal", image: img, Profession: "Web Developer", Experience: "3", Timestamp: "09/08/24, 12:00pm" },
     { UserId: "#12233", Name: "Lydia", image: img, Profession: "UI Designer", Experience: "5", Timestamp: "09/08/24, 12:10pm" },
@@ -70,13 +70,13 @@ export const RewardReq = () => {
                     >
                       <IoMdCheckboxOutline /> Approve
                     </Menu.Item>
-                    <Menu.Item color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
-                    <Menu.Item
+                    <Menu.Item  color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
+                    <Menu.Item 
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Decline", "red.500", <MdOutlineCancel boxSize={3} />)}
                     >
                       <MdOutlineCancel /> Decline
-                    </Menu.Item>
+                     </Menu.Item>
                   </Menu.Content>
                 </Menu.Positioner>
               </Portal>
@@ -88,7 +88,7 @@ export const RewardReq = () => {
   };
 
   return (
-    <Box   bg="#F5F6FA" p={6}>
+    <Box w={'full'} bg="#F5F6FA" p={6}>
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}

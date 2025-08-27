@@ -27,6 +27,7 @@ import { OrganizationCommunity } from './organization/features/community/Communi
 import { OrganizationSettingsTab } from './organization/features/setting/SettingsTabpanel';
 import AdminLayout from './admin/components/Layout/AppLayout';
 import { AdminHome } from './admin/features/home/Homes';
+import { UsersHome } from './admin/features/Users/users';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
@@ -92,7 +93,7 @@ function App() {
               } 
             >
               <Route path="/admin/dashboard" index element={<AdminHome />} />
-              <Route path="/admin/directory" element={<AdminHome />} />
+              <Route path="/admin/users" element={<UsersHome />} />
               {/* <Route path="/admin/post-history" element={<AdminPostHistory />} /> */}
                
             {/* Admin */}
