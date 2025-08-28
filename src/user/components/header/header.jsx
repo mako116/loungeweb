@@ -52,7 +52,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               strokeLinejoin="round"
               strokeWidth="2"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+               stroke="currentColor"
             >
               <path d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -61,17 +61,17 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         
 
         {/* Search Bar */}
-        <div className="hidden sm:block w-[600px]">
+        <Box md:w={{base:'350px',md:'600px'}} className="hidden sm:block ">
            <InputGroup  fontFamily={'inter'}  startElement={<BiSearch />}>
             <Input h={{base:20,md:50}} rounded={10} placeholder="Search your course here...." />
           </InputGroup>
-        </div>
+        </Box>
 
         {/* Header Actions */}
         <div className="flex items-center gap-5">
           
            <Button bg={'transparent'}>
-              <Image src={Notfyimage} alt="Lounge Logo" className="object-cover w-[46px] h-[46px] rounded-full" />
+              <Image  w={{base:29,lg:46}} src={Notfyimage} alt="Lounge Logo" className="object-cover  rounded-full" />
             </Button>
            
           {/* Avatar Dropdown */}

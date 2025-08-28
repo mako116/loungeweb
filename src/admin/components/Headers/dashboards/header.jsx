@@ -16,7 +16,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   // Map routes to header titles
   const headerTitles = {
     "/admin/dashboard": "Dashboard",
-    "/admin/directory": "Directory",
+    "/admin/users": "Users",
     "/admin/learning-hub": "Learning Hub",
     "/admin/mentoring": "Mentoring",
     "/admin/community": "Community",
@@ -76,8 +76,13 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         
 
         {/* Search Bar */}
-        <div className="  ">
-            <Text>
+        <div className=" md:block hidden">
+            <Text 
+            color={'#202020'}
+            fontFamily={'InterMedium'}
+            fontSize={{base:16,md:24}}
+            fontWeight={'500'}
+            >
             {contents}
             </Text>
         </div>
@@ -86,7 +91,12 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="flex items-center gap-5">
           
            <Button bg={'transparent'}>
-              <Image src={Notfyimage} alt="Lounge Logo" className="object-cover w-[46px] h-[46px] rounded-full" />
+              <Image 
+              w={{base:8,md:10}} 
+        h={{base:8,md:10}} 
+              src={Notfyimage} 
+              alt="Lounge Logo" 
+              className="object-cover  rounded-full" />
             </Button>
            
           {/* Avatar Dropdown */}

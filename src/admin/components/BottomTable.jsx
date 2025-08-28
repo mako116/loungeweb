@@ -1,6 +1,8 @@
+
 import { Box, Table, Image, Text, HStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Pagination from "../../components/pagination/adminpagination";
+import Pagination from "./pagination/adminpagination";
+import React from "react";
 
 const MotionTbody = motion(Table.Body);
 const MotionTr = motion(Table.Row);
@@ -10,7 +12,7 @@ const containerVariants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const rowAnimation = {
+const rowAnimation = { 
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
 };
@@ -20,11 +22,11 @@ export const BottomTable = ({ dataTable, pageSize, currentPage, setCurrentPage, 
   const endIndex = startIndex + pageSize;
   const paginatedRows = dataTable.row.slice(startIndex, endIndex);
 
-  return (
+   return (
     <Box bg="#fff" px={0} rounded="lg" border="1px solid #CECECE" overflowX="auto">
       <Table.Root size="sm" striped>
         <Table.Header>
-          <Table.Row bg="#F9FAFB">
+          <Table.Row bg="#fff">
             {Object.keys(dataTable.col).map((colKey) => (
               <Table.ColumnHeader
                 key={colKey}
@@ -35,7 +37,9 @@ export const BottomTable = ({ dataTable, pageSize, currentPage, setCurrentPage, 
                 borderBottom="1px solid #CECECE"
                 fontFamily="OutfitRegular"
                 py="20px"
+                bg="#fff"
                 textAlign="start"
+                whiteSpace={'nowrap'}
               >
                 {dataTable.col[colKey][`${colKey}_1`]}
               </Table.ColumnHeader>
@@ -70,21 +74,23 @@ export const BottomTable = ({ dataTable, pageSize, currentPage, setCurrentPage, 
                   );
                 }
 
-                return (
-                  <Table.Cell
-                    key={`${row.row_0}-${colKey}`}
-                    fontSize={["11px", "13px"]}
-                    fontWeight="400"
-                    letterSpacing="1%"
-                    color="#222222E5"
-                    fontFamily="OutfitRegular"
-                  >
-                    {typeof cell?.[`row_${colIndex + 1}_1`] === "string" ||
-                    typeof cell?.[`row_${colIndex + 1}_1`] === "number"
-                      ? cell?.[`row_${colIndex + 1}_1`]
-                      : "-"}
-                  </Table.Cell>
-                );
+                    return (
+  <Table.Cell
+    key={`${row.row_0}-${colKey}`}
+    fontSize={["11px", "13px"]}
+    fontWeight="400"
+    letterSpacing="1%"
+    color="#222222E5"
+    fontFamily="OutfitRegular"
+  >
+                   {React.isValidElement(cell?.[`row_${colIndex + 1}_1`])
+                    ? cell?.[`row_${colIndex + 1}_1`]
+                  : typeof cell?.[`row_${colIndex + 1}_1`] === "string" ||
+                  typeof cell?.[`row_${colIndex + 1}_1`] === "number"
+                 ? cell?.[`row_${colIndex + 1}_1`]
+                 : "-"}
+                 </Table.Cell>);
+
               })}
             </MotionTr>
           ))}

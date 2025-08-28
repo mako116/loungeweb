@@ -86,6 +86,29 @@
   font-style: normal;
 }
 
+/* nunito */
+ @font-face {
+  font-family: "nunitoRegular";
+  src: url("./assets/font/nunito/Nunito-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+ 
+
+/* Semi Bold */
+@font-face {
+  font-family: "nunitoSemiBold";
+  src: url("./assets/font/nunito/Nunito-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+/* bold */
+@font-face {
+  font-family: "nunitoBold";
+  src: url("./assets/font/nunito/Nunito-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
 
 /* Hide scrollbar in webkit browsers */
 .scroll-container::-webkit-scrollbar {

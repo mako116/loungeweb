@@ -7,7 +7,7 @@ import {
   Image,
   Input,
   InputGroup,
-  Stack,
+  Stack, 
   Text,
 } from '@chakra-ui/react'
 import React, { useState, useEffect, useRef } from 'react'
@@ -119,25 +119,30 @@ export const Program = () => {
         </HStack>
       </Flex>
 
-      <Flex mr={{ base: 0, md: 100 }} overflow="hidden" my={5}>
-        <Flex
-          ref={newsRef}
-          transform={`translateX(-${newsIndex * 100}%)`}
-          transition="transform 0.5s ease-in-out"
-          width={`${(newsSlides.length / newsItems.length) * 100}%`}
-        >
-          {newsSlides.map((item, idx) => (
-            <Box key={idx} minW="100%" bg="white" py={10} border="1px solid #080F340F" rounded={20}>
-              <Heading color="#202020" fontWeight="bold" fontSize={{ base: 18, md: 24 }} fontFamily="LatoBold">
-                {item.title}
-              </Heading>
-              <Text mt={3} color="#1C1C1CB2" fontWeight="medium" fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
-                {item.description}
-              </Text>
-            </Box>
-          ))}
-        </Flex>
-      </Flex>
+       <Flex 
+             overflowX="hidden"   // ✅ only hide horizontal overflow
+             overflowY="auto"     // ✅ allow vertical scroll if content is taller
+             my={5}
+            mr={{ base: 0, md: 100 }}  
+               >
+              <Flex
+                ref={newsRef}
+                transform={`translateX(-${newsIndex * 100}%)`}
+                transition="transform 0.5s ease-in-out"
+                width={`${(newsSlides.length / newsItems.length) * 100}%`}
+              >
+                {newsSlides.map((item, idx) => (
+                  <Box key={idx} minW="100%"   h="auto" overflow="visible"  bg="white" p={10} border="1px solid #080F340F" rounded={20}>
+                    <Heading  whiteSpace="normal"   wordBreak="break-word"  color="#202020" fontWeight="bold" fontSize={{ base: 18, md: 24 }} fontFamily="LatoBold">
+                      {item.title}
+                    </Heading>
+                    <Text mt={3} flexWrap={'wrap'}   wordBreak="break-word" whiteSpace="normal"   color="#1C1C1CB2" fontWeight="medium" fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
+                      {item.description}
+                    </Text>
+                  </Box>
+                ))}
+              </Flex>
+            </Flex>
 
       {/* -------- Speaker’s Highlights Slider -------- */}
       <Flex alignItems={'center'} justifyContent={'space-between'}>
