@@ -9,6 +9,8 @@ import {
    Image,
    Input,
    InputGroup,
+   Menu,
+   Portal,
    Stack,
   Text,
   Textarea,
@@ -20,6 +22,8 @@ import {
  import bulb from "../../../../assets/fluent-color_lightbulb-filament-20.png"
 import { GrMicrophone } from "react-icons/gr";
 import { CiImageOn } from "react-icons/ci";
+import { CgRemove } from "react-icons/cg";
+import { IoIosArrowUp, IoMdCloseCircleOutline } from "react-icons/io";
 
 
 export const PostAdminDetails = () => {
@@ -77,9 +81,25 @@ const actions = [
                         </Text>
                       </Stack>
                 </HStack>
-                <Button color={'#212121'} bg={'transparent'}>
-                    <BsThreeDots />
-                </Button>
+                 {/* toggle */}
+                <Menu.Root>
+      <Menu.Trigger asChild >
+        <Button bg={'transparent'} color={'#212121'}  size="sm">
+          <BsThreeDots />
+        </Button>
+      </Menu.Trigger>
+      <Portal rounded={30}>
+        <Menu.Positioner rounded={30} >
+          <Menu.Content rounded={25}>
+           <Menu.Item value="new-txt"> Action <IoIosArrowUp /></Menu.Item>
+            <Menu.Item value="new-txt"> <IoMdCloseCircleOutline /> Remove Post</Menu.Item>
+            
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
+               
+              
                 </Flex>
                   
                   <Text textAlign={"center"}

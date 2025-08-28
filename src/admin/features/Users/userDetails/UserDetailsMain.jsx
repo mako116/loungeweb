@@ -6,7 +6,7 @@ import avatar from "../../../../assets/Image.png"
 
 export const UserDetailsMain = () => {
   return (
-    <Box px={5}>
+    <Box mb={6} p={5} h={'150%'}  bg="#F5F6FA">
         <Grid templateColumns={{base:"repeat(1, 1fr)",
             md:"repeat(2, 1fr)",
             lg:"repeat(3, 1fr)",

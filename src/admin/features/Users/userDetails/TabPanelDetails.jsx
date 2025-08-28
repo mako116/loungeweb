@@ -14,7 +14,7 @@ export const UserDetailsTabpanel = () => {
       const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Tabs.Root bg="#F5F6FA" defaultValue="PersonalInfo">
+    <Tabs.Root bg="#F5F6FA"  defaultValue="PersonalInfo">
       <Flex alignItems={'center'} pt={{base:1,md:0}} justifyContent={"space-between"}>
         {/* Tabs */}
         <Tabs.List whiteSpace={'nowrap'}>
