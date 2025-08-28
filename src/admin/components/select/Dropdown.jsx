@@ -1,14 +1,19 @@
 "use client"
 
-import { Portal, Select, createListCollection } from "@chakra-ui/react"
-
-export const Dropdown = () => {
+import { Flex, Portal, Select, createListCollection } from "@chakra-ui/react"
+import { MdBusinessCenter } from "react-icons/md"
+import { frameworks } from "../../features/Users/users"
+ 
+export const Dropdown = ({icon}) => {
   return (
     <Select.Root  collection={frameworks} size="xs" width="140px">
       <Select.HiddenSelect />
-       <Select.Control  py={3} rounded={12} bg={'#EBEBEB'} >
+       <Select.Control  py={2} rounded={12} bg={'transparent'} border={'1px solid #CCCCCCCC'} >
         <Select.Trigger border={'none'} outline={'none'}>
-          <Select.ValueText   fontWeight={'medium'} color={'#9E9E9E'} placeholder="Select " />
+          <Flex gap={2}>
+            {icon && <MdBusinessCenter/>}
+            <Select.ValueText   fontWeight={'medium'} color={'#9E9E9E'} placeholder="Select " />
+        </Flex>
         </Select.Trigger>
         <Select.IndicatorGroup>
           <Select.Indicator />
@@ -30,11 +35,4 @@ export const Dropdown = () => {
   )
 }
 
-const frameworks = createListCollection({
-  items: [
-    { label: "finance", value: "finance" },
-    { label: "finances", value: "finances" },
-    { label: "Angular", value: "angular" },
-    { label: "Svelte", value: "svelte" },
-  ],
-})
+

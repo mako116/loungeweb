@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  createListCollection,
   Flex,
   Heading,
   IconButton,
@@ -34,6 +35,14 @@ export const Mentoring = () => {
     setSelectedCard(null);
   };
 
+ const frameworks = createListCollection({
+    items: [
+      { label: "finance", value: "finance" },
+      { label: "finances", value: "finances" },
+      { label: "Angular", value: "angular" },
+      { label: "Svelte", value: "svelte" },
+    ],
+  })
   return (
     <Box bg={'#F5F6FA'} h={"100%"} p={3}>
       <Heading display={'flex'} pb={4} gap={2} alignItems={'center'}>
@@ -67,7 +76,7 @@ export const Mentoring = () => {
 
         <Dropdown
         // title={'finance'}
-        
+        frameworks={frameworks}
         />
 
         </Flex>
