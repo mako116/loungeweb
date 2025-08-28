@@ -28,6 +28,7 @@ import { OrganizationSettingsTab } from './organization/features/setting/Setting
 import AdminLayout from './admin/components/Layout/AppLayout';
 import { AdminHome } from './admin/features/home/Homes';
 import { UsersHome } from './admin/features/Users/users';
+import { UserDetailsMain } from './admin/features/Users/userDetails/UserDetailsMain';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
@@ -80,8 +81,7 @@ function App() {
               <Route path="/organization/community" element={<OrganizationCommunity />} />
               <Route path="/organization/settings" element={<OrganizationSettingsTab />} />
 
-            {/* Admin */}
-            </Route>
+             </Route>
 
             {/* Admin */}
             <Route
@@ -94,7 +94,7 @@ function App() {
             >
               <Route path="/admin/dashboard" index element={<AdminHome />} />
               <Route path="/admin/users" element={<UsersHome />} />
-              {/* <Route path="/admin/post-history" element={<AdminPostHistory />} /> */}
+              <Route path="/admin/user-details" element={<UserDetailsMain />} />
                
             {/* Admin */}
             </Route>

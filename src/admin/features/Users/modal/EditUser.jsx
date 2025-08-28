@@ -20,14 +20,11 @@ import {
 import { FaBriefcase, FaFacebook } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import { BsLinkedin } from "react-icons/bs";
-import { RxDotsVertical } from "react-icons/rx";
-import { MdEmail } from "react-icons/md";
+ import { MdEmail } from "react-icons/md";
 import { ImPhoneHangUp } from "react-icons/im";
 import { IoLocationOutline } from "react-icons/io5";
-import images from "../../../../assets/course.png"
-import { GoPlusCircle } from "react-icons/go";
-
-export const CreateNewUser = ({ isOpen, onClose }) => {
+ 
+export const EditNewUser = ({ isOpen, onClose }) => {
  
   return (
     <Dialog.Root open={isOpen} onOpenChange={(e) => !e.open && onClose()}>
@@ -228,9 +225,9 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
          </InputGroup>
         </Field.Root>
 
-          {/* expert */}
+        {/* expert */}
        <Field.Root >
-      <Field.Label
+      <Field.Label 
        fontWeight={'400'}
        fontSize={{base:11,md:14}}
        fontFamily="InterMedium"

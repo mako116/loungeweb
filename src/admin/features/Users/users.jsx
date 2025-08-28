@@ -5,7 +5,7 @@ export const UsersHome = () => {
   
   
   return (
-    <Box h="100vh" bg="#F5F6FA" p={6}>
+    <Box h="100vh" bg="#F5F6FA" px={6}>
       {/* <DashboardCard/> */}
       <DashboardTabpanel/>
     </Box>

@@ -7,7 +7,7 @@ import {
   Image,
   SimpleGrid,
   Stack,
-  Text,
+  Text, 
 } from "@chakra-ui/react";
  import { BiPlus } from "react-icons/bi";
 import logo from "../../../../assets/Image.png";

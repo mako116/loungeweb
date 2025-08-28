@@ -70,7 +70,9 @@ export const Members = () => {
                     >
                       <IoMdCheckboxOutline /> Send mail
                     </Menu.Item>
-                    <Menu.Item  color="#333333CC" onClick={() => navigate(`/users/${row.UserId}`)}>View Details</Menu.Item>
+                    <Menu.Item  color="#333333CC" 
+                    onClick={() => navigate(`/admin/user-details`)}>
+                      View Details</Menu.Item>
                     <Menu.Item 
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Decline", "red.500", <MdOutlineCancel boxSize={3} />)}
@@ -88,7 +90,7 @@ export const Members = () => {
   };
 
   return (
-    <Box w={'full'} bg="#F5F6FA" p={{base:1,md:6}}>
+    <Box w={'full'} bg="#F5F6FA"  >
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}
