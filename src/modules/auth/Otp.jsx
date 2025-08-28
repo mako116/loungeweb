@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -13,21 +13,63 @@ import {
   Spinner,
   PinInput,
 } from "@chakra-ui/react";
- 
+ import {AuthContext} from '../../context/AuthContext'
 import LoungeLogo from "../../assets/Frame.png";
+import {useRequest} from '../../hooks/useRequest'
+import { toast } from "react-toastify";
+import { useRef } from "react";
 function Otp() {
    const [isLoading, setIsLoading] = useState(true);
- const [otp, setOtp] = useState("");
+
    const navigate = useNavigate()
- 
+  
+ const {userDetails} = useContext(AuthContext)
+
+ const {makeRequest, loading} = useRequest();
+const otpRef = useRef('');
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleDashboard = () =>{
-     navigate("/login")
+  const handleResendCode = async ()=>{
+
+    const res = await makeRequest('/resend-email-otp',{
+      email: userDetails?.email
+    });
+
+    toast.success(res.response.message);
+  }
+function maskEmail(email) {
+  let [username, domain] = email.split("@");
+
+  if (username.length > 5) {
+    // Keep first 5 characters, replace the rest with *
+    username = username.substring(0, 5) + "*".repeat(username.length - 5);
+  } else {
+    // If username is shorter, just keep first character
+    username = username[0] + "*".repeat(username.length - 1);
+  }
+
+  return `${username}@${domain}`;
+}
+  const handleVerifyOtp = async() =>{
+       
+    if(otpRef.current.length < 4){
+      return toast.error("Please enter a valid 4-digit code");  
+    }
+    const res = await makeRequest('/verify-email', {
+      code: Number(otpRef.current)
+    });
+    
+    if(res.error) return;
+   
+    toast.success(res.response.message);
+    setTimeout(()=>{
+ navigate('/login');
+    }, 2000);
+   
 
   }
 
@@ -80,14 +122,18 @@ function Otp() {
                   fontFamily={'inter'} 
                   fontSize={{base:12,md:14}}
                   color={'#645D5D'} >
-                  Enter code sent to (simon**********@gmail.com)
+                  Enter code sent to {userDetails ? maskEmail(userDetails.email) : 'your email'}
              </Text>
           </Flex>
           </Stack>
       
         <PinInput.Root otp  fontFamily={'inter'} 
-        onComplete={(value) => setOtp(value)} // when all digits are entered
-         onValueChange={(value) => console.log("Current value:", value)}  // live changes
+       
+         onValueChange={(value) => {
+          
+          otpRef.current = value.valueAsString;
+          
+         }}  // live changes
          mx={{base:'1',md:'auto'}}>
       <PinInput.HiddenInput  />
       <PinInput.Control >
@@ -107,6 +153,7 @@ function Otp() {
         <Box
          as={RouterLink}
           to={'#'}
+          onClick={handleResendCode}
          fontWeight={'600'} 
           fontSize={{base:12,md:14}}
             fontFamily={'inter'}  
@@ -117,8 +164,10 @@ function Otp() {
                Resend Code
            </Box>
          </Text>
-         <Button  fontFamily={'inter'}  maxW={'70%'} mx={'auto'} onClick={handleDashboard} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        Enter
+         <Button  fontFamily={'inter'}  maxW={'70%'} mx={'auto'} onClick={handleVerifyOtp} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {
+          loading ? <Spinner size="md" thickness="4px" speed="0.65s" color="white" /> : "Verify Account"    
+        }
       </Button>
       </Fieldset.Root>
       </Flex>

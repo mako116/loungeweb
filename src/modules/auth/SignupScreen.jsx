@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -11,24 +11,66 @@ import {
   Stack,
    Text,
   Spinner,
+  
 } from "@chakra-ui/react";
  
 import LoungeLogo from "../../assets/Frame.png";
  import Google from "../../assets/google.png";
  import divder from "../../assets/Dividers.svg";
 import { BiHide, BiShow } from "react-icons/bi";
+import { m } from "framer-motion";
+import { toast } from "react-toastify";
+import {useRequest} from '../../hooks/useRequest'
+import { AuthContext } from "../../context/AuthContext";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const nameRef = React.useRef();
+  const {loading, success, error, makeRequest} = useRequest()
+  const emailRef = React.useRef();
+  const {setUserDetails} = useContext(AuthContext);
+  const passwordRef = React.useRef();
   const navigate = useNavigate()
+
   useEffect(() => {
+    
     const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleOTP = () =>{
-    navigate("/otp")
+  const handleSignup = async () =>{
+    if(!nameRef.current.value || !emailRef.current.value || !passwordRef.current.value){
+     
+       toast.error('All fields are required')
+      
+      return;
+    }
+try {
+      const res = await makeRequest('/register', {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value
+    })
+
+    if(res.response){
+      toast.success(res.response.message);
+      setUserDetails(res.response.user);
+      setTimeout(()=>{
+return navigate('/otp');
+      }, 2000);
+      
+    }
+
+} catch (error) {
+  console.log(error);
+  toast.error('Server Error')
+}
+
+
+   
+
+    
   }
   if (isLoading) {
     return (
@@ -100,9 +142,25 @@ function SignUp() {
          fontWeight={'500'} 
        
          fontSize={{base:12,md:14}}
+        >Name
+        </Field.Label>
+          <Input name="name" type="text" 
+          ref={nameRef}
+          
+          py={{base:3,md:7}} />
+        </Field.Root>
+
+        <Field.Root   fontFamily={'inter'}  >
+        <Field.Label   
+         color={'rgba(27, 24, 24, 1)'} 
+         fontWeight={'500'} 
+       
+         fontSize={{base:12,md:14}}
         >Email address
         </Field.Label>
           <Input name="email" type="email" 
+          ref={emailRef}
+          
           py={{base:3,md:7}} />
         </Field.Root>
 
@@ -114,6 +172,8 @@ function SignUp() {
           Password</Field.Label>
           <Input name="password" 
           position={'relative'}
+          ref={passwordRef}
+
            type={showPassword ? "text" : "password"}
            py={{base:3,md:7}}  />
             <span
@@ -134,8 +194,11 @@ function SignUp() {
         
       </Fieldset.Content>
 
-      <Button  fontFamily={'inter'}  onClick={handleOTP} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        Sign up
+      <Button disabled={loading}  fontFamily={'inter'}  onClick={handleSignup} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {
+        loading ? <Spinner /> :  'Sign up'
+        }
+       
       </Button>
         <Text 
             lineHeight={'40px'}

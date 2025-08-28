@@ -17,10 +17,14 @@ import LoungeLogo from "../../assets/Frame.png";
  import Google from "../../assets/google.png";
  import divder from "../../assets/Dividers.svg";
 import { BiHide, BiShow } from "react-icons/bi";
+import {useRequest} from '../../hooks/useRequest'
+import { toast } from "react-toastify";
 
 function ForgotEmail() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const {makeRequest, loading} = useRequest()
+  const [email, setEmail] = useState('')
  
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
@@ -29,8 +33,14 @@ function ForgotEmail() {
 
      const navigate = useNavigate()
 
-    const handlePasswordPage = () =>{
-     navigate("/reset-password")
+    const handlePasswordPage = async() =>{
+      const res = await makeRequest('/check-email-exists', {email});
+      if(res.error) return;
+      toast.success('We have sent an OTP to your email. Use it to reset your password');
+    setTimeout(()=>{
+navigate("/reset-password")
+    }, 2000)
+     
 
     }
   if (isLoading) {
@@ -82,7 +92,7 @@ function ForgotEmail() {
        
          fontSize={{base:12,md:14}}
         >Email address</Field.Label>
-          <Input name="email" type="email" 
+          <Input name="email" type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email"  fontFamily={'inter'}  borderColor={'rgba(112, 122, 131, 0.3)'} _placeholder={{ color: 'rgba(112, 122, 131, 1)', fontSize:{base:12,md:14}}} fontSize={{base:12,md:14}}  mb={4} mt={2}  focusBorderColor="blue.500" size="lg"
           py={{base:3,md:7}} />
         </Field.Root>
 
@@ -90,7 +100,9 @@ function ForgotEmail() {
       </Fieldset.Content>
 
       <Button  fontFamily={'inter'}  onClick={handlePasswordPage} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        send 
+{
+  loading? <Spinner/>:'send'
+} 
       </Button>
        </Fieldset.Root>
       </Flex>

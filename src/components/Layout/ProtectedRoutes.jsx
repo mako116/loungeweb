@@ -1,25 +1,50 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// src/components/ProtectedRoute.jsx
+import React, { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
+import { Spinner } from "@chakra-ui/react";
 
-function ProtectedRoute({ children }) {
-  const navigate = useNavigate();
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("ACCESS_TOKEN");
+  const {userDetails, setUserDetails} = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check if a user exists in localStorage (replace 'user' with your key)
-    const user = localStorage.getItem("user");
+    const fetchUser = async () => {
+      if (!token) {
+        setLoading(false);
+        return;
+      }
 
-    if (!user) {
-      navigate("/login", { replace: true }); // Redirect to login if no user
-    }
-  }, [navigate]);
+      try {
+        const res = await axios("/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  // Render children only if user exists
-  const user = localStorage.getItem("user");
-  if (!user) {
-    return null; // Optionally, render a spinner here
-  }
+        setUserDetails(res.data); // store user in AuthContext
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("Auth error:", error);
+        localStorage.removeItem("ACCESS_TOKEN");
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return <>{children}</>;
-}
+    fetchUser();
+  }, []);
+
+  if (loading) return <Spinner/>;
+
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  return children;
+};
 
 export default ProtectedRoute;

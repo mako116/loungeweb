@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -17,18 +17,41 @@ import LoungeLogo from "../../assets/Frame.png";
  import Google from "../../assets/google.png";
  import divder from "../../assets/Dividers.svg";
 import { BiHide, BiShow } from "react-icons/bi";
+import { useRequest } from "../../hooks/useRequest";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const emailRef = useRef('');
+  const {makeRequest, loading} = useRequest();
+  const { setUserDetails} = useContext(AuthContext)
+  const passwordRef = useRef('')
  const navigate = useNavigate()
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleDashboard = () =>{
-    navigate("/dashboard")
+  const handleLogin = async () =>{
+    if(!emailRef.current.value || !passwordRef.current.value){
+      return toast.error('All fields are required');
+    }
+    const res = await makeRequest('/login', {
+      email: emailRef.current.value,
+      password:passwordRef.current.value
+    })
+
+    localStorage.setItem("ACCESS_TOKEN", res.response.token);
+    setUserDetails(res.response.user);
+    toast.success('Login Successful');
+
+    setTimeout(()=>{
+navigate("/dashboard")
+    }, 2000);
+
+    
   }
 
   if (isLoading) {
@@ -107,7 +130,8 @@ function Login() {
         </Field.Label>
           <Input 
           name="email" 
-          type="email" 
+          type="email"
+          ref={emailRef} 
           py={{base:3,md:7}} />
         </Field.Root>
 
@@ -121,6 +145,7 @@ function Login() {
           <Input 
           name="password" 
           position={'relative'}
+          ref={passwordRef}
            type={showPassword ? "text" : "password"}
            py={{base:3,md:7}} 
             />
@@ -142,8 +167,10 @@ function Login() {
         
       </Fieldset.Content>
 
-      <Button  fontFamily={'inter'} onClick={handleDashboard}  alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        Login
+      <Button  fontFamily={'inter'} onClick={handleLogin}  alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {
+          loading? <Spinner/>:'Login'
+        }
       </Button>
         <Text 
             lineHeight={'40px'}

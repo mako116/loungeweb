@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -15,11 +15,18 @@ import {
 import LoungeLogo from "../../assets/Frame.png";
  import Google from "../../assets/google.png";
  import divder from "../../assets/Dividers.svg";
+ import { useRequest } from "../../hooks/useRequest";
 import { BiHide, BiShow } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const {makeRequest, loading} = useRequest()
+const passwordRef = useRef('')
+
+  const otpRef = useRef('');
+  const emailRef = useRef('')
  
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
@@ -28,8 +35,25 @@ function ResetPassword() {
 
      const navigate = useNavigate()
 
-    const handleReset = () =>{
-     navigate("/login")
+
+    const handleReset = async () =>{
+      if(!emailRef.current.value || !otpRef.current || !passwordRef.current.value){
+        return toast.error('All fields are required');
+      }
+      const res = await makeRequest('/reset-password', {
+        email:emailRef.current.value,
+        otp: otpRef.current,
+        password: passwordRef.current.value
+      })
+    //  navigate("/login")
+   
+    if(res.error) return;
+
+    toast.success(res.response.message);
+
+    setTimeout(()=>{
+      navigate('/login');
+    }, 2000);
 
     }
   if (isLoading) {
@@ -73,6 +97,8 @@ function ResetPassword() {
         fontSize={{base:24,md:36}}> Reset Password!</Fieldset.Legend>
         
       <Fieldset.Content>
+        
+        
          <Field.Root   fontFamily={'inter'}  >
         <Field.Label   
          color={'rgba(27, 24, 24, 1)'} 
@@ -82,8 +108,8 @@ function ResetPassword() {
         >Enter OTP Code
         </Field.Label>
          <PinInput.Root otp  fontFamily={'inter'} 
-                onComplete={(value) => setOtp(value)}  
-                 onValueChange={(value) => console.log("Current value:", value)}  // live changes
+                
+                 onValueChange={(value) => otpRef.current = value.valueAsString}  // live changes
                 mx={{base:'1',md:'auto'}}>
               <PinInput.HiddenInput  />
               <PinInput.Control >
@@ -95,24 +121,29 @@ function ResetPassword() {
               </PinInput.Root>
               </Field.Root>
 
-        <Field.Root  fontFamily={'inter'}  >
-        <Field.Label   
-         color={'rgba(27, 24, 24, 1)'} 
-         fontWeight={'500'} 
-       
-         fontSize={{base:12,md:14}}
-        >Email address</Field.Label>
-          <Input name="email" type="email" 
-          py={{base:3,md:7}} />
+             <Field.Root  fontFamily={'inter'}  >
+           <Field.Label 
+             color={'rgba(27, 24, 24, 1)'} 
+              fontWeight={'500'} 
+              fontSize={{base:12,md:14}}>
+               Email</Field.Label>
+               <Input name="email" 
+                position={'relative'}
+                ref={emailRef}
+                type="email"
+                py={{base:3,md:7}}  />
+               
         </Field.Root>
+
          <Field.Root  fontFamily={'inter'}  >
            <Field.Label 
              color={'rgba(27, 24, 24, 1)'} 
               fontWeight={'500'} 
               fontSize={{base:12,md:14}}>
-                Password</Field.Label>
+               New Password</Field.Label>
                <Input name="password" 
                 position={'relative'}
+                ref={passwordRef}
                 type={showPassword ? "text" : "password"}
                 py={{base:3,md:7}}  />
                 <span
@@ -133,7 +164,9 @@ function ResetPassword() {
       </Fieldset.Content>
 
       <Button  fontFamily={'inter'}  onClick={handleReset} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        send 
+        {
+          loading? <Spinner/>:'Send'
+        }
       </Button>
        </Fieldset.Root>
       </Flex>

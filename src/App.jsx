@@ -27,14 +27,15 @@ import { OrganizationCommunity } from './organization/features/community/Communi
 import { OrganizationSettingsTab } from './organization/features/setting/SettingsTabpanel';
 import AdminLayout from './admin/components/Layout/AppLayout';
 import { AdminHome } from './admin/features/home/Homes';
-import { UsersHome } from './admin/features/Users/users';
+import ProtectedRoute from './components/Layout/ProtectedRoutes';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
 function App() {
   // users
   const Home = lazy(() => import("./user/features/home/Homes"));
- 
+// const SelectedWheelSpin = lazy(() => import("./Features/Games/ALLGames/Wheel Spin/SelectedWheelSpin"));
+
   const [count, setCount] = useState(0)
 
   return (
@@ -45,9 +46,9 @@ function App() {
             <Route
             path='/'
               element={
-                // <ProtectedRoute>
+                 <ProtectedRoute>
                   <AppLayout />
-                // </ProtectedRoute>
+                 </ProtectedRoute>
               } 
             >
               <Route path="/dashboard" index element={<Homes />} />
@@ -94,9 +95,14 @@ function App() {
               } 
             >
               <Route path="/admin/dashboard" index element={<AdminHome />} />
-              <Route path="/admin/users" element={<UsersHome />} />
-              {/* <Route path="/admin/post-history" element={<AdminPostHistory />} /> */}
-               
+              {/* <Route path="/admin/profile/:id" element={<AdminProfileDetails />} />
+              <Route path="/admin/post-history" element={<AdminPostHistory />} /> */}
+              {/* <Route path="/admin/directory" element={<OrganizationDirectory />} />
+              <Route path="/admin/learning-hub" element={<OrganizationTopTabs />} />
+              <Route path="/admin/mentoring" element={<OrganizationMentoring />} />
+              <Route path="/admin/community" element={<OrganizationCommunity />} />
+              <Route path="/admin/settings" element={<OrganizationSettingsTab />} /> */}
+
             {/* Admin */}
             </Route>
 
