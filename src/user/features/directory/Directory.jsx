@@ -14,6 +14,7 @@ import {
   Heading,
   InputGroup,
   Input,
+  createListCollection,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
@@ -26,6 +27,8 @@ import facebk from "../../../assets/logos_facebook.png";
 import logo from "../../../assets/Profile.png"
 import { LuUser } from "react-icons/lu";
 import { SelectOption } from "../../components/select/Select";
+import { Dropdown } from "../../components/select/Dropdown";
+import { BiSearch } from "react-icons/bi";
 // ✅ Directory Data (dynamic)
 const DirectoryData = [
   {
@@ -65,11 +68,19 @@ const DirectoryData = [
     socials: [linkedin],
   },
 ];
-
+export const frameworks = createListCollection({
+  items: [
+    { label: "finance", value: "finance" },
+    { label: "finances", value: "finances" },
+    { label: "Angular", value: "angular" },
+    { label: "Svelte", value: "svelte" },
+  ],
+})
 const Directory = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(DirectoryData[0]); // default profile
 
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -77,30 +88,28 @@ const Directory = () => {
   return (
     <Box
       bg={'#F5F6FA'}
-      h={"100%"}
+      h={"150vh"}
+      pb={'50%'}
       px={3}
       py={4}>
-        <Stack mb={3} px={2} w={{base:100,md:400}} flexDirection={'row'} alignItems={'center'} >
-            <InputGroup  startElement={<FaLocationDot size={10} />}>
-             <Input py={25} fontSize={10} borderRadius={10} placeholder="Username" />
-           </InputGroup>
-           <Flex w={'100%'}  gap={3}  display={'flex'} alignItems={'center'} justifyContent={'center'}>
-             <SelectOption
-            title={'Experience'}
-            placeholder={'Experience'}
-            showCase
-            />
-            <SelectOption
-            title={'People'}
-            placeholder={'People'}
-            showUser
-            />
-           </Flex>
-        </Stack>
-         
-  
+        <Stack mb={3} px={2} w={{base:100,md:600}} flexDirection={'row'} alignItems={'center'} >
+                    <InputGroup  startElement={<BiSearch size={10} />}>
+                     <Input py={25} 
+                      fontSize={10} 
+                      borderRadius={10} 
+                      placeholder="Name, Industry & Skill" />
+                    </InputGroup>
+                    <InputGroup  
+                     startElement={<FaLocationDot 
+                     size={10} />}>
+                      <Input py={25} fontSize={10} borderRadius={10} placeholder="Location" />
+                </InputGroup>
+               <Flex w={'100%'}  gap={3}  display={'flex'} alignItems={'center'} justifyContent={'center'}>
+                 <Dropdown frameworks={frameworks} icon/>
+                <Dropdown frameworks={frameworks} icons/>
+            </Flex>
+       </Stack>
     <Flex
-      
       flexDirection={{ base: "column", md: "row" }}
       alignItems={"flex-start"}
       justifyContent={"space-between"}

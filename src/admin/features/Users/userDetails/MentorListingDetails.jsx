@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Card,
-  createListCollection,
   Flex,
   Heading,
   IconButton,
@@ -12,16 +11,15 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { cardData } from "../../../hooks/useData";
-import { MentoringDetails } from "./MentoringDetails";
+import  { useState } from "react";
+import { cardData } from "../../../../hooks/useData";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { SelectOption } from "../../components/select/Select";
-import { CiSearch } from "react-icons/ci";
-import { Dropdown } from "../../components/select/Dropdown";
+ import { CiSearch } from "react-icons/ci";
+import { Dropdown } from "../../../components/select/Dropdown";
 import { IoIosArrowBack } from "react-icons/io";
+import { AdminMentoringDetails } from "../modal/MentorDetailsModal";
 
-export const Mentoring = () => {
+export const MentorListing = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,14 +33,6 @@ export const Mentoring = () => {
     setSelectedCard(null);
   };
 
- const frameworks = createListCollection({
-    items: [
-      { label: "finance", value: "finance" },
-      { label: "finances", value: "finances" },
-      { label: "Angular", value: "angular" },
-      { label: "Svelte", value: "svelte" },
-    ],
-  })
   return (
     <Box bg={'#F5F6FA'} h={"100%"} p={3}>
       <Heading display={'flex'} pb={4} gap={2} alignItems={'center'}>
@@ -58,28 +48,6 @@ export const Mentoring = () => {
         </IconButton>
         Mentor Listings
       </Heading>
-        <Flex justifyContent={'space-between'} 
-        flexDirection={{base:'column',md:"row"}} 
-        pb={5} alignItems={{base:'flex-start',md:'center'}} 
-        gap={{base:4,md:10}}>
-        <InputGroup
-         w={{base:'100%',md: 700}}
-           startElement={<CiSearch size={15} />}
-           >                
-          <Input
-            py={6}
-          fontSize={10}
-          borderRadius={10}
-         placeholder="Search..."
-         /> 
-         </InputGroup>
-
-        <Dropdown
-        // title={'finance'}
-        frameworks={frameworks}
-        />
-
-        </Flex>
         
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing={6} gap={5}>
         {cardData.map((card, idx) => (
@@ -136,26 +104,13 @@ export const Mentoring = () => {
               </Card.Description>
               </Button>
             </Card.Body>
-            <Card.Footer>
-              <Button
-                w={"full"}
-                fontFamily="InterRegular"
-                fontSize={12}
-                bg={"#F2F2F2"}
-                color={"#333333B2"}
-                rounded={20}
-                p={5}
-              >
-               Request Session
-              </Button>
-            </Card.Footer>
           </Card.Root>
         ))}
       </SimpleGrid>
 
       {/* Modal */}
       {selectedCard && (
-        <MentoringDetails
+        <AdminMentoringDetails
           isOpen={isOpen}
           onClose={handleClose}
           profile={selectedCard}

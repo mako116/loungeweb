@@ -17,8 +17,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const headerTitles = {
     "/admin/dashboard": "Dashboard",
     "/admin/users": "Users",
-    "/admin/learning-hub": "Learning Hub",
-    "/admin/mentoring": "Mentoring",
+    "/admin/user-details": "User Details",
+    "/admin/organization-details": "Organization Details",
     "/admin/community": "Community",
     "/admin/settings": "Settings",
     "/admin/logout": "Logout",
