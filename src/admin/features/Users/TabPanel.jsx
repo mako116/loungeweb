@@ -7,14 +7,7 @@ import { useState } from "react";
 import { CreateNewUser } from "./modal/CreateUser";
 
 export const DashboardTabpanel = () => {
-      const [isOpen, setIsOpen] = useState(false);
-
-    const handleAddUser = () => {
-       setIsOpen(true);
-     };
-      const handleClose = () => {
-      setIsOpen(false);
-      };
+    
   return (
     <Tabs.Root bg="#F5F6FA" defaultValue="Members">
       <Flex alignItems={'center'} pt={{base:1,md:0}} justifyContent={"space-between"}>
@@ -37,33 +30,11 @@ export const DashboardTabpanel = () => {
           </Tabs.Trigger>
          
         </Tabs.List>
-          <Button
-              size="sm"
-              border={`1px solid #333`}
-              rounded={20}
-              color={"#333"}
-              bg="#fff"
-              onClick={handleAddUser}
-              _hover={{ bg: "#f0f0f0" }}
-            >
-              <HStack spacing={2}>
-                <FaUserPlus size={12} />
-                <Text
-                  fontSize={{base:10,md:13}}
-                  fontWeight="400"
-                  fontFamily="OutfitRegular"
-                >
-                  Add New User
-                </Text>
-              </HStack>
-            </Button>
+         
           
       </Flex>
 
-      <CreateNewUser 
-        isOpen={isOpen}
-        onClose={handleClose}
-      />
+     
       {/* Tab Contents */}
       <Tabs.Content value="Members">
         <Members />

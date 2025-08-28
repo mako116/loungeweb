@@ -5,13 +5,22 @@ import img from "../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { FaUserPlus } from "react-icons/fa";
+import { CreateNewUser } from "./modal/CreateUser";
 
 export const Members = () => {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowActions, setRowActions] = useState({});
   const navigate = useNavigate();
- 
+     const [isOpen, setIsOpen] = useState(false);
+  
+      const handleAddUser = () => {
+         setIsOpen(true);
+       };
+        const handleClose = () => {
+        setIsOpen(false);
+        };
   const tableData = [
     { UserId: "#38734", Name: "Jamal", image: img, Profession: "Web Developer", Experience: "3", Timestamp: "09/08/24, 12:00pm" },
     { UserId: "#12233", Name: "Lydia", image: img, Profession: "UI Designer", Experience: "5", Timestamp: "09/08/24, 12:10pm" },
@@ -90,7 +99,36 @@ export const Members = () => {
   };
 
   return (
-    <Box w={'full'} bg="#F5F6FA"  >
+    <Box w={'full'} bg="#F5F6FA"  py={{base:1,md:6}} >
+      <Button
+          mb={4}
+           position={'absolute'}
+           right={0}
+           top={5}
+              size="sm"
+              border={`1px solid #333`}
+              rounded={20}
+              color={"#333"}
+              bg="#fff"
+              onClick={handleAddUser}
+              _hover={{ bg: "#f0f0f0" }}
+            >
+              <HStack spacing={2}>
+                <FaUserPlus size={12} />
+                <Text
+                  fontSize={{base:10,md:13}}
+                  fontWeight="400"
+                  fontFamily="OutfitRegular"
+                >
+                  Add New User
+                </Text>
+              </HStack>
+            </Button>
+
+             <CreateNewUser 
+                    isOpen={isOpen}
+                    onClose={handleClose}
+                  />
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}

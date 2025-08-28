@@ -29,6 +29,7 @@ import AdminLayout from './admin/components/Layout/AppLayout';
 import { AdminHome } from './admin/features/home/Homes';
 import { UsersHome } from './admin/features/Users/users';
 import { UserDetailsMain } from './admin/features/Users/userDetails/UserDetailsMain';
+import { OrganDetailsAdminMain } from './admin/features/Users/organizationDetails/OrganDetailsMain';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
@@ -95,7 +96,8 @@ function App() {
               <Route path="/admin/dashboard" index element={<AdminHome />} />
               <Route path="/admin/users" element={<UsersHome />} />
               <Route path="/admin/user-details" element={<UserDetailsMain />} />
-               
+              <Route path="/admin/organization-details" element={<OrganDetailsAdminMain />} />
+
             {/* Admin */}
             </Route>
 

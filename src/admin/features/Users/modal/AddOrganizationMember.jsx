@@ -27,7 +27,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import images from "../../../../assets/course.png"
 import { GoPlusCircle } from "react-icons/go";
 
-export const CreateNewUser = ({ isOpen, onClose }) => {
+export const CreateNewOrgMember = ({ isOpen, onClose }) => {
  
   return (
     <Dialog.Root open={isOpen} onOpenChange={(e) => !e.open && onClose()}>
@@ -43,7 +43,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
           fontWeight={'400'}
            fontSize={{base:15,md:20}}
            fontFamily="InterBold"
-           color={'#1A1A21'}>Create User</Fieldset.Legend>
+           color={'#1A1A21'}>Add Member</Fieldset.Legend>
            </Stack>
               <Stack mx={'auto'} position={'relative'}>
               <Image
@@ -84,9 +84,9 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
         </Field.Root>
         </HStack>
         
-       <HStack flexDirection={{base:'column',md:'row'}}  gap={2}>
+       <HStack  flexDirection={{base:'column',xl:'row'}}  gap={2}>
        {/* Gender */}
-      <Field.Root w={{base:"100%",md:200}}>
+      <Field.Root w={{base:"100%",xl:200}}>
       <Field.Label
        fontWeight={'400'}
        fontSize={{base:11,md:14}}
@@ -112,7 +112,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
          </Field.Root>
         
         {/* Pronouns */}
-        <Field.Root w={{base:"100%",md:250}}>
+        <Field.Root w={{base:"100%",xl:250}}>
       <Field.Label
        fontWeight={'400'}
        fontSize={{base:11,md:14}}
@@ -177,7 +177,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
          </InputGroup>
         </Field.Root>
             
-      <HStack  pt={2} flexDirection={{base:'column',md:'row'}}>
+      <HStack  pt={2} flexDirection={{base:'column',xl:'row'}}>
         {/* Phone Number */}
         <Field.Root>
           <Field.Label
@@ -215,7 +215,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
         </Field.Root>
         </HStack>
 
-        <HStack flexDirection={{base:'column',md:'row'}}>
+        <HStack flexDirection={{base:'column',lg:'row'}}>
         {/* Profesion */}
          <Field.Root>
           <Field.Label
@@ -234,7 +234,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
        fontWeight={'400'}
        fontSize={{base:11,md:14}}
        fontFamily="InterMedium"
-       color={'#101928'}>Expert</Field.Label>
+       color={'#101928'}>Category</Field.Label>
       <NativeSelect.Root>
          {/* Icon on the left */}
        <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" color="gray.500">
@@ -282,45 +282,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
          </InputGroup>
         </Field.Root>
 
-         {/* Organization */}
-          <HStack pt={3} flexDirection={{base:'column',md:'row'}} gap={5}>
-            <Field.Root>
-          <Field.Label
-          fontWeight={'400'}
-           fontSize={{base:11,md:14}}
-           fontFamily="InterMedium"
-           color={'#101928'} >Organization</Field.Label>
-           <InputGroup startElement={
-             <Image
-             src={images}
-             alt="Update"
-             boxSize="20px"
-            //  objectFit={'cover'}
-             rounded={30}
-           />
-           }>
-             <Input py={6} fontSize={{base:10,md:13}} fontFamily="InterRegular" placeholder="Living Springs Finance LTD" />
-         </InputGroup>
-
-
-         <Text
-         fontWeight={'400'}
-           fontSize={{base:10,md:14}}
-           fontFamily="InterRegular"
-           color={'#667185'}
-         >Change Organisation</Text>
-        </Field.Root>
-
-        {/* create button */}
-        <Button py={6} 
-        w={'100%'}
-        color={'#333333CC'}
-        fontSize={{base:10,md:14}} 
-        bg={'#DFDFDF'}>
-            <GoPlusCircle color="#1D1B20" />
-            Create Organization
-        </Button>
-          </HStack>
+         
 
          {/* Bio */}
           <Field.Root>
@@ -352,7 +314,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
            fontSize={{base:10,md:14}}
            rounded={5}
            bg={'#2B362F'} >
-            Create Profile
+            Create Member
           </Button>
          </HStack>
          </Fieldset.Root>

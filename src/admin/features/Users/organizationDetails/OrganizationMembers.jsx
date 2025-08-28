@@ -1,28 +1,27 @@
 import { Box, Menu, Button, Portal, HStack, Text } from "@chakra-ui/react";
-import { BottomTable } from "../../components/BottomTable";
+import { BottomTable } from "../../../components/BottomTable";
 import { useState } from "react";
-import img from "../../../assets/Profile.png";
+import img from "../../../../assets/Profile.png";
 import { IoIosArrowDown, IoMdCheckboxOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FaUserPlus } from "react-icons/fa";
-import { CreateOrganization } from "./modal/CreateOrganization";
+import { CreateNewOrgMember } from "../modal/AddOrganizationMember";
 
-export const Organization = () => {
+export const OrganizationMembers = () => {
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowActions, setRowActions] = useState({});
   const navigate = useNavigate();
-
-   const [isOpen, setIsOpen] = useState(false);
-    
-        const handleAddUser = () => {
-           setIsOpen(true);
-         };
-          const handleClose = () => {
-          setIsOpen(false);
-          };
-
+ 
+    const [isOpen, setIsOpen] = useState(false);
+  
+         const handleAddUser = () => {
+         setIsOpen(true);
+       };
+        const handleClose = () => {
+        setIsOpen(false);
+        };
   const tableData = [
     { UserId: "#38734", Name: "Jamal", image: img, Profession: "Web Developer", Experience: "3", Timestamp: "09/08/24, 12:00pm" },
     { UserId: "#12233", Name: "Lydia", image: img, Profession: "UI Designer", Experience: "5", Timestamp: "09/08/24, 12:10pm" },
@@ -39,9 +38,9 @@ export const Organization = () => {
     col: {
       col_1: { col_1_1: "User ID" },
       col_2: { col_2_1: "Name & Image" },
-      col_3: { col_3_1: "Industry" },
-      col_4: { col_4_1: "URL" },
-      col_5: { col_5_1: "Members" },
+      col_3: { col_3_1: "Profession" },
+      col_4: { col_4_1: "Experience" },
+      col_5: { col_5_1: "Last Visited" },
       col_6: { col_6_1: "Action" },
     },
     row: tableData.map((row, index) => {
@@ -52,14 +51,13 @@ export const Organization = () => {
         row_1: { row_1_1: row.UserId },
         row_2: { row_2_1: row.image, row_2_2: row.Name },
         row_3: { row_3_1: row.Profession },
-        row_4: { row_4_1: (
-          <Text textDecoration={'underline'}>
-            Manuel Neuer.com
-          </Text>
-        ) },
-        row_5: { row_5_1: row.Experience },
-        row_6: {
-          row_6_1: (
+        row_4: { row_4_1: row.Experience },
+        row_5: { row_5_1:(
+          <Text color={'#0EAD69E5'}>Approved</Text>
+        )},
+        row_6: { row_6_1: row.Timestamp },
+        row_7: {
+          row_7_1: (
             <Menu.Root key={uniqueKey}>
               <Menu.Trigger asChild>
                 <Button
@@ -82,16 +80,18 @@ export const Organization = () => {
                     <Menu.Item
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Approve", "green.500", <IoMdCheckboxOutline boxSize={3} />)}
-                    > 
-                      <IoMdCheckboxOutline /> Approve
+                    >
+                      <IoMdCheckboxOutline /> Send mail
                     </Menu.Item>
-                    <Menu.Item color="#333333CC" onClick={() => navigate(`/admin/organization-details`)}>View Details</Menu.Item>
-                    <Menu.Item
+                    <Menu.Item  color="#333333CC" 
+                    onClick={() => navigate(`/admin/user-details`)}>
+                      View Details</Menu.Item>
+                    <Menu.Item 
                       color="#333333CC"
                       onClick={() => handleSelect(row.UserId, "Decline", "red.500", <MdOutlineCancel boxSize={3} />)}
                     >
-                      <MdOutlineCancel /> Decline
-                    </Menu.Item>
+                      <MdOutlineCancel /> Deactivate
+                     </Menu.Item>
                   </Menu.Content>
                 </Menu.Positioner>
               </Portal>
@@ -103,37 +103,39 @@ export const Organization = () => {
   };
 
   return (
-    <Box   bg="#F5F6FA" py={{base:1,md:6}}>
-     
-       <Button
-           mb={4}
-           position={'absolute'}
-           right={0}
-           top={5}
+    <Box w={'full'} bg="#F5F6FA"
+     py={5}
+    >
+        <Button
+       position={'absolute'}
+       top={4}
+       right={0}
              size="sm"
-             border={`1px solid #333`}
-              rounded={20}
-              color={"#333"}
-              bg="#fff"
-              onClick={handleAddUser}
-             _hover={{ bg: "#f0f0f0" }}
-             >
-            <HStack spacing={2}>
-             <FaUserPlus size={12} />
-              <Text
-               fontSize={{base:10,md:13}}
-               fontWeight="400"
-               fontFamily="OutfitRegular"
-               >
-                Add New Organization
-              </Text>
-             </HStack>
-          </Button>
-     
-         <CreateOrganization 
-           isOpen={isOpen}
-           onClose={handleClose}
-         />
+                 border={`1px solid #333`}
+                    rounded={20}
+                     color={"#333"}
+                      bg="#fff"
+                      onClick={handleAddUser}
+                      _hover={{ bg: "#f0f0f0" }}
+                      >
+                      <HStack spacing={2}>
+                       <FaUserPlus size={12} />
+                       <Text
+                         fontSize={{base:10,md:13}}
+                         fontWeight="400"
+                         fontFamily="OutfitRegular"
+                       >
+                       Add New Member
+                  </Text>
+
+
+                  {/* create member */}
+                      <CreateNewOrgMember
+                       isOpen={isOpen}
+                       onClose={handleClose}
+                       />
+                </HStack>
+         </Button>
       <BottomTable
         dataTable={dataTable}
         pageSize={pageSize}
