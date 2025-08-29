@@ -26,4 +26,5 @@ createRoot(document.getElementById('root')).render(
       </ChakraProvider>
     </AuthProvider>
   </StrictMode>
-)
+)   
+ 

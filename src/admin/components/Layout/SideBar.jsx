@@ -69,7 +69,7 @@ const SideBarItem = ({ sidebarOpen, setSidebarOpen }) => {
     () => [
       { text: "Dashboard", link: "/admin/dashboard", icon: IoMdClock },
       { text: "Users", link: "/admin/users", icon: FaUser },
-      { text: "Learning Hub", link: "/admin/learning-hub", icon: LuCalendarDays },
+      { text: "Contents", link: "/admin/contents", icon: LuCalendarDays },
       { text: "Mentoring", link: "/admin/mentoring", icon: BiSolidCopyAlt },
       { text: "Community", link: "/admin/community", icon: FaUsers },
       { text: "Settings", link: "/admin/settings", icon: IoMdSettings },

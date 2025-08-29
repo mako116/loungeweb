@@ -2,15 +2,17 @@
 
 import { Flex, Portal, Select, createListCollection } from "@chakra-ui/react"
 import { MdBusinessCenter } from "react-icons/md"
-import { frameworks } from "../../features/Users/users"
+import { RiCalendarEventFill } from "react-icons/ri"
+// import { frameworks } from "../../features/Users/users"
  
-export const Dropdown = ({icon}) => {
+export const Dropdown = ({icon,frameworks,iconed}) => {
   return (
     <Select.Root  collection={frameworks} size="xs" width="140px">
       <Select.HiddenSelect />
        <Select.Control  py={2} rounded={12} bg={'transparent'} border={'1px solid #CCCCCCCC'} >
         <Select.Trigger border={'none'} outline={'none'}>
           <Flex gap={2}>
+            {iconed && <RiCalendarEventFill/>}
             {icon && <MdBusinessCenter/>}
             <Select.ValueText   fontWeight={'medium'} color={'#9E9E9E'} placeholder="Select " />
         </Flex>

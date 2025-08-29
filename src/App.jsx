@@ -31,16 +31,13 @@ import ProtectedRoute from './components/Layout/ProtectedRoutes';
 import { UsersHome } from './admin/features/Users/users';
 import { UserDetailsMain } from './admin/features/Users/userDetails/UserDetailsMain';
 import { OrganDetailsAdminMain } from './admin/features/Users/organizationDetails/OrganDetailsMain';
+import { AdminContent } from './admin/features/Contents/TopTabPanel';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
 function App() {
-  // users
-  const Home = lazy(() => import("./user/features/home/Homes"));
-// const SelectedWheelSpin = lazy(() => import("./Features/Games/ALLGames/Wheel Spin/SelectedWheelSpin"));
-
-  const [count, setCount] = useState(0)
-
+ const Home = lazy(() => import("./user/features/home/Homes"));
+ 
   return (
     <BrowserRouter>
         <Suspense fallback={<Spinner />}>
@@ -100,6 +97,7 @@ function App() {
               <Route path="/admin/users" element={<UsersHome />} />
               <Route path="/admin/user-details" element={<UserDetailsMain />} />
               <Route path="/admin/organization-details" element={<OrganDetailsAdminMain />} />
+              <Route path="/admin/contents" element={<AdminContent />} />
 
             {/* Admin */}
             </Route>

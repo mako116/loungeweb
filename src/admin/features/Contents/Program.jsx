@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Heading,
   HStack,
@@ -16,8 +17,13 @@ import { cardData } from '../../../hooks/useData'
 import { CiClock2, CiSearch } from 'react-icons/ci'
 import tick from "../../../assets/check.png";
 import file from "../../../assets/fileattach.png";
+import { RiPencilLine } from 'react-icons/ri'
+import { EditProgram } from './Modal/EditProgram'
+import { EditSpeakerHighlight } from './Modal/EditSpeakerHighlights'
+import { EditSpeakerHeader } from './Modal/Edit2SpeakersForm'
+import { EditSession } from './Modal/EditSession'
 
-export const Program = () => {
+export const AdminProgram = () => {
   // ---------- News Slider ----------
   const newsItems = [
     {
@@ -76,41 +82,50 @@ export const Program = () => {
     if (sessionIndex < 0) setTimeout(() => setSessionIndex(cardData.length - 1), 300)
     else if (sessionIndex >= cardData.length) setTimeout(() => setSessionIndex(0), 300)
   }, [sessionIndex])
+    
+     const [isOpened, setIsOpened] = useState(false);
+       const [isOpen, setIsOpen] = useState(false);
+      const [isOpens, setIsOpens] = useState(false);
+      const [isOpenin, setIsOpenin] = useState(false);
+
+     const handleCardClick = (card) => {
+      setIsOpen(true);
+     };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    };
+
+     const handleSession = () => {
+      setIsOpenin(true);
+     };
+
+  const handleSessionClose = () => {
+    setIsOpenin(false);
+    };
+
+    
+     const handleCardClicks= () => {
+      setIsOpens(true);
+     };
+
+  const handleCloses = () => {
+    setIsOpens(false);
+    };
+   
+     const handleAction = () => {
+     setIsOpened(true);
+  };
+
+  const handleClosed = () => {
+    setIsOpened(false);
+   };
 
   return (
     <Box h={'120%'} mb={'10%'} px={5}>
-     
-      {/* Header */}
-      <HStack gap={5} mb={5}>
-        <IconButton bg="#fff" border="1px solid #9E9E9E" rounded={20} aria-label="back">
-          <IoIosArrowBack color="#9E9E9E" />
-        </IconButton>
-        <Text color="#202020" fontWeight={'medium'} fontSize={{ base: 17, md: 24 }} fontFamily="InterMedium">
-          Learning Hub
-        </Text>
-      </HStack>
-        <InputGroup
-            // w={300}        
-            // mt={}
-            mb={5}
-            startElement={<CiSearch size={15} />}
-           >
-           <Input
-            py={15}
-            bg={'#fff'}
-            fontSize={12}
-            borderRadius={10}
-            placeholder="Search..."
-           />
-         </InputGroup>
-      
-
-      {/* -------- News & Updates Slider -------- */}
-      <Flex alignItems={'center'} justifyContent={'space-between'}>
-        <Text color="#202020" fontWeight={'medium'} fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
-          News & Updates
-        </Text>
-        <HStack gap={2}>
+       <Flex alignItems={'center'} justifyContent={'space-between'}>
+         
+        <HStack w={'100%'} justifyContent={'flex-end'} gap={2}>
           <IconButton bg="#fff" border="1px solid #9E9E9E" rounded={20} aria-label="Prev" onClick={handleNewsPrev}>
             <IoIosArrowBack color="#9E9E9E" />
           </IconButton>
@@ -121,8 +136,8 @@ export const Program = () => {
       </Flex>
 
       <Flex 
-       overflowX="hidden"   // ✅ only hide horizontal overflow
-       overflowY="auto"     // ✅ allow vertical scroll if content is taller
+       overflowX="hidden"    
+       overflowY="auto"   
        my={5}
       mr={{ base: 0, md: 100 }} 
          >
@@ -133,23 +148,45 @@ export const Program = () => {
           width={`${(newsSlides.length / newsItems.length) * 100}%`}
         >
           {newsSlides.map((item, idx) => (
-            <Box key={idx} minW="100%"   h="auto" overflow="visible"  bg="white" p={10} border="1px solid #080F340F" rounded={20}>
+            <Box key={idx} minW="100%" position="relative"   h="auto" overflow="visible"  bg="white" p={10} border="1px solid #080F340F" rounded={20}>
               <Heading  whiteSpace="normal"   wordBreak="break-word"  color="#202020" fontWeight="bold" fontSize={{ base: 18, md: 24 }} fontFamily="LatoBold">
                 {item.title}
               </Heading>
               <Text mt={3} flexWrap={'wrap'}   wordBreak="break-word" whiteSpace="normal"   color="#1C1C1CB2" fontWeight="medium" fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
                 {item.description}
               </Text>
+               <Button
+               position={'absolute'}
+               top={0}
+               bg={'transparent'}
+               color={'#212121'}
+               right={0}
+               onClick={() => handleAction()} 
+               >
+             <RiPencilLine/> 
+            </Button>
             </Box>
           ))}
+         
         </Flex>
+        
       </Flex>
 
-      {/* -------- Speaker’s Highlights Slider -------- */}
-      <Flex alignItems={'center'} justifyContent={'space-between'}>
-        <Text color="#202020" fontWeight={'medium'} fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
-          Speaker’s Highlights
-        </Text>
+       <Flex alignItems={'center'} justifyContent={'space-between'}>
+        <Flex alignItems={'center'}>
+            <Button
+               
+               bg={'transparent'}
+               color={'#212121'}
+                onClick={() => handleCardClicks()} 
+               >
+             <RiPencilLine/> 
+            </Button>
+             <Text color="#202020" fontWeight={'medium'} fontSize={{ base: 14, md: 16 }} fontFamily="LatoRegular">
+             Speaker’s Highlights
+            </Text>
+        </Flex>
+       
         <HStack gap={2}>
           <IconButton bg="#fff" border="1px solid #9E9E9E" rounded={20} aria-label="Prev" onClick={handleSpeakerPrev}>
             <IoIosArrowBack color="#9E9E9E" />
@@ -168,7 +205,7 @@ export const Program = () => {
         >
           {speakerSlides.map((card, idx) => (
             <Box key={idx} flex={`0 0 ${100 / visibleSpeakerCards}%`} p={2}>
-              <Box bg="white" p={5} border="1px solid #080F340F" rounded={20} h="100%">
+              <Box position={'relative'} bg="white" p={5} border="1px solid #080F340F" rounded={20} h="100%">
                 <HStack>
                   <Image src={card.subimage} alt="Speaker" boxSize="40px" rounded="full" />
                   <Stack spacing={0}>
@@ -183,7 +220,18 @@ export const Program = () => {
                 <Text mt={3} fontFamily="InterRegular" fontWeight={'normal'} fontSize={{ base: 12, md: 14 }} color="#333333E5">
                   {card.title || 'Highlight details...'}
                 </Text>
+                  <Button
+               position={'absolute'}
+               top={0}
+               bg={'transparent'}
+               color={'#212121'}
+               right={0}
+               onClick={() => handleCardClick()} 
+               >
+             <RiPencilLine/> 
+            </Button>
               </Box>
+             
             </Box>
           ))}
         </Flex>
@@ -211,13 +259,23 @@ export const Program = () => {
           transition="transform 0.5s ease-in-out"
         >
           {sessionSlides.map((card, idx) => (
-            <Box key={idx} overflow={'hidden'} border="1px solid #080F340F" rounded={20} h="100%" mr={5} 
+            <Box   key={idx} overflow={'hidden'} border="1px solid #080F340F" rounded={20} h="100%" mr={5} 
             flex={`0 0 ${53 / visibleSessionCards}%`}
             >
-              <Stack p={5} roundedTop={20} bg={'#000'}>
+              <Stack position={'relative'} p={5} roundedTop={20} bg={'#000'}>
                 <Text fontFamily="InterBold" fontSize={{ base: 17, md: 20 }} color={'#fff'}>
                   Session 2
                 </Text>
+                 <Button
+               position={'absolute'}
+               top={0}
+               bg={'transparent'}
+               color={'#212121'}
+               right={0}
+               onClick={() => handleSession()} 
+               >
+             <RiPencilLine  color={'#fff'}/> 
+            </Button>
               </Stack>
               <Box bg="white" p={5} borderBottom={'2px solid #E8E8E8'}>
                 <Text fontFamily="LatoRegular" fontSize={{ base: 13, md: 16 }} color={'#10192899'}>
@@ -268,10 +326,29 @@ export const Program = () => {
               <Box bg="white" pb={2}>
               <Image pl={4} src={file} alt="Speaker" w={110} rounded="full" />
               </Box>
+              
             </Box>
           ))}
         </Flex>
       </Flex>
+
+       <EditProgram
+         isOpen={isOpened}
+         onClose={handleClosed}
+       />
+
+       <EditSpeakerHeader
+        isOpen={isOpens}
+         onClose={handleCloses}
+       />
+       <EditSpeakerHighlight
+        isOpen={isOpen}
+         onClose={handleClose}
+       />
+       <EditSession
+        isOpen={isOpenin}
+         onClose={handleSessionClose}
+       />
     </Box>
   )
 }

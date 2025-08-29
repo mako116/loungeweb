@@ -57,7 +57,7 @@ export const TopTabs = () => {
           rounded={5}
           _selected={{ bg: "#2B362F", color: "#fff" }}
         >
-         <MdStars />
+         <MdStars /> 
           Program
         </Tabs.Trigger>
         <Tabs.Trigger 

@@ -313,7 +313,7 @@ export const CreateNewUser = ({ isOpen, onClose }) => {
 
         {/* create button */}
         <Button py={6} 
-        w={'100%'}
+        // w={'100%'}
         color={'#333333CC'}
         fontSize={{base:10,md:14}} 
         bg={'#DFDFDF'}>
