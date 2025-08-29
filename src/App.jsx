@@ -27,6 +27,7 @@ import { OrganizationCommunity } from './organization/features/community/Communi
 import { OrganizationSettingsTab } from './organization/features/setting/SettingsTabpanel';
 import AdminLayout from './admin/components/Layout/AppLayout';
 import { AdminHome } from './admin/features/home/Homes';
+import ProtectedRoute from './components/Layout/ProtectedRoutes';
 import { UsersHome } from './admin/features/Users/users';
 import { UserDetailsMain } from './admin/features/Users/userDetails/UserDetailsMain';
 import { OrganDetailsAdminMain } from './admin/features/Users/organizationDetails/OrganDetailsMain';

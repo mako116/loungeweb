@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        console.log("Fetched user:", res.data);
         setUserDetails(res.data); // store user in AuthContext
         setIsAuthenticated(true);
       } catch (error) {

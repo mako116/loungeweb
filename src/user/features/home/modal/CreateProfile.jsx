@@ -14,6 +14,7 @@ import {
    InputGroup,
    Text,
    Textarea,
+   Spinner,
    } from "@chakra-ui/react";
  import logo from "../../../../assets/Image.png";
  import tick from "../../../../assets/Verified tick2.png";
@@ -26,8 +27,120 @@ import { ImPhoneHangUp } from "react-icons/im";
 import { IoLocationOutline } from "react-icons/io5";
 import images from "../../../../assets/course.png"
 import { GoPlusCircle } from "react-icons/go";
-
+import { useContext, useRef, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useRequest } from "../../../../hooks/useRequest";
+import {AuthContext} from '../../../../context/AuthContext';
 export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
+  const {userDetails, setUserDetails} = useContext(AuthContext);
+
+ 
+  
+  const {makeRequest, loading} = useRequest();  
+   const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();  
+  const phoneRef = useRef();
+  const facebookRef = useRef();
+  const linkedinRef = useRef();
+  const professionRef = useRef();
+  const categoryRef = useRef('Founder');
+  const experienceRef = useRef();
+  const locationRef = useRef();
+  const rootsRef = useRef('African');
+  const bioRef = useRef();
+  const pronounsRef = useRef('He/Him');
+  const genderRef = useRef('Male')
+
+
+  const handleImageClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // open file picker
+    }
+
+  
+  };
+  const handleFileChange = async (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // show preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      // TODO: send `file` to your backend API for upload
+      const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "lounge-platform"); // Replace with your Cloudinary preset
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/wokodavid/image/upload",
+        formData
+      );
+
+      const imageUrl = res.data.secure_url;
+     setProfileImage(imageUrl);
+
+    const resp =  await makeRequest('/profile/upload', {profilePic: imageUrl});
+
+    if(resp.error){
+      return;
+    }
+     setUserDetails(resp.response.user);
+
+     toast.success(resp.response.message);
+     // If you have a callback to inform parent component
+
+     
+
+      
+    } catch (error) {
+      console.error("Image upload failed", error);
+      toast.error('Image Upload Failed. Please try again.');
+    }
+    }
+  };
+
+  const handleCreateProfile = async () => {
+   
+    if(!firstNameRef.current.value || !lastNameRef.current.value || !emailRef.current.value || !professionRef.current.value || !categoryRef.current.value || !experienceRef.current.value || !locationRef.current.value || !bioRef.current.value){
+      return toast.error('Please fill all required fields');
+    }
+    const profileData = {
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneRef.current.value,
+      facebook: facebookRef.current.value,
+      linkedin: linkedinRef.current.value,
+      profession: professionRef.current.value,
+      category: categoryRef.current.value,
+      experience: experienceRef.current.value,
+      location: locationRef.current.value,
+      roots: rootsRef.current.value,
+      bio: bioRef.current.value,
+      pronouns: pronounsRef.current.value,  
+      profilePic: profileImage
+  }
+  
+const res = await makeRequest('/profile', profileData);
+
+setUserDetails(res.response.user);
+
+if(res.error){
+  return;
+}
+toast.success('Profile Created Successfully');
+onFinish(); // notify parent component
+
+}
  
   return (
     <Dialog.Root open={isOpen} onOpenChange={(e) => !e.open && onClose()}>
@@ -46,14 +159,24 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            color={'#1A1A21'}>Create Profile</Fieldset.Legend>
            </Stack>
               <Stack mx={'auto'} position={'relative'}>
+                
               <Image
-                src={logo}
-                alt="Update"
-                boxSize={{base:'70px',md:"100px"}}
-                borderRadius="md"
-                objectFit="cover"
-               
-              />
+        src={preview || userDetails?.profile_picture ||logo} // fallback to default image
+        alt="Profile Image"
+        boxSize={{ base: "70px", md: "100px" }}
+        borderRadius="full"
+        objectFit="cover"
+        cursor="pointer"
+        onClick={handleImageClick}
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
                 
           
         </Stack>
@@ -65,9 +188,9 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
           fontWeight={'400'}
            fontSize={{base:12,md:14}}
            fontFamily="InterMedium"
-           color={'#101928'} >Name</Field.Label>
+           color={'#101928'} > First Name</Field.Label>
            <InputGroup startElement={<CiUser />}>
-             <Input  py={6}  placeholder="Surname" />
+             <Input  py={6}  placeholder="First Name" ref={firstNameRef}/>
          </InputGroup>
         </Field.Root>
 
@@ -79,7 +202,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Last Name</Field.Label>
            <InputGroup startElement={<CiUser />}>
-             <Input  py={6}  placeholder="Last Name" />
+             <Input  py={6}  placeholder="Last Name" ref={lastNameRef}/>
          </InputGroup>
         </Field.Root>
         </HStack>
@@ -101,7 +224,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
          <NativeSelect.Field name="country" pl="10">
           <For each={["Male", "Female", "others"]}>
             {(item) => (
-           <option key={item} value={item}>
+           <option key={item} value={item} ref={genderRef}>
             {item}
            </option>
            )}
@@ -127,7 +250,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
          <NativeSelect.Field name="country" pl="10">
           <For each={["He/Him", "She/Her", "others"]}>
             {(item) => (
-           <option key={item} value={item}>
+           <option key={item} value={item} ref={pronounsRef}>
             {item}
            </option>
            )}
@@ -153,7 +276,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
          <NativeSelect.Field name="country" pl="10">
           <For each={["African", "American", "Asia"]}>
             {(item) => (
-           <option key={item} value={item}>
+           <option key={item} value={item} ref={rootsRef}>
             {item}
            </option>
            )}
@@ -173,7 +296,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Email</Field.Label>
            <InputGroup startElement={<MdEmail />}>
-             <Input py={6} placeholder="johnmercy03@gmail.com" />
+             <Input py={6} placeholder="johnmercy03@gmail.com" ref={emailRef} />
          </InputGroup>
         </Field.Root>
             
@@ -186,7 +309,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Phone Number</Field.Label>
            <InputGroup startElement={<ImPhoneHangUp />}>
-             <Input  py={6}  placeholder="phoneNumber" />
+             <Input  py={6}  placeholder="phoneNumber" ref={phoneRef}/>
          </InputGroup>
         </Field.Root>
 
@@ -198,7 +321,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Face book</Field.Label>
            <InputGroup startElement={<FaFacebook color="#1877F2" />}>
-             <Input  py={6}  placeholder=" johnmercy" />
+             <Input  py={6}  placeholder=" johnmercy" ref={facebookRef} />
          </InputGroup>
         </Field.Root>
 
@@ -210,7 +333,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Linkedin</Field.Label>
            <InputGroup startElement={<BsLinkedin color="#0A66C2" />}>
-             <Input  py={6}  placeholder="" />
+             <Input  py={6}  placeholder="" ref={linkedinRef}/>
          </InputGroup>
         </Field.Root>
         </HStack>
@@ -224,7 +347,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            fontFamily="InterMedium"
            color={'#101928'} >Profesion</Field.Label>
            <InputGroup startElement={<FaBriefcase />}>
-             <Input py={6}  placeholder="Financial Analyst" />
+             <Input py={6}  placeholder="Financial Analyst" ref={professionRef} />
          </InputGroup>
         </Field.Root>
 
@@ -234,10 +357,34 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
        fontWeight={'400'}
        fontSize={{base:12,md:14}}
        fontFamily="InterMedium"
-       color={'#101928'}>Expert</Field.Label>
+       color={'#101928'}>Category</Field.Label>
       <NativeSelect.Root>
          {/* Icon on the left */}
        <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" color="gray.500">
+          <FaBriefcase />
+         </Box>
+
+         <NativeSelect.Field name="country" pl="10">
+          <For each={["Founder", "Professional", "Expert", "Entrepreneur"]}>
+            {(item) => (
+           <option key={item} value={item} ref={categoryRef}>
+            {item}
+           </option>
+           )}
+          </For>
+          </NativeSelect.Field>
+          <NativeSelect.Indicator />
+          </NativeSelect.Root>
+         </Field.Root>
+         {/* <Field.Root >
+      <Field.Label
+       fontWeight={'400'}
+       fontSize={{base:12,md:14}}
+       fontFamily="InterMedium"
+       color={'#101928'}>Expert</Field.Label>
+      <NativeSelect.Root>
+         {/* Icon on the left */}
+       {/* <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" color="gray.500">
           <FaBriefcase />
          </Box>
 
@@ -252,7 +399,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
           </NativeSelect.Field>
           <NativeSelect.Indicator />
           </NativeSelect.Root>
-         </Field.Root>
+         </Field.Root>  */}
 
         </HStack>
 
@@ -263,9 +410,9 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
           fontWeight={'400'}
            fontSize={{base:12,md:14}}
            fontFamily="InterMedium"
-           color={'#101928'} >Experience (Years)</Field.Label>
+           color={'#101928'} >Experience Level (Years)</Field.Label>
            <InputGroup startElement={<FaBriefcase />}>
-             <Input py={6}  placeholder="5" />
+             <Input py={6}  placeholder="5" type="number" ref={experienceRef}/>
          </InputGroup>
         </Field.Root>
 
@@ -276,9 +423,9 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
           fontWeight={'400'}
            fontSize={{base:12,md:14}}
            fontFamily="InterMedium"
-           color={'#101928'} >Location</Field.Label>
+           color={'#101928'} >City</Field.Label>
            <InputGroup startElement={<IoLocationOutline />}>
-             <Input py={6}  placeholder="select" />
+             <Input py={6}  placeholder="City" ref={locationRef}/>
          </InputGroup>
         </Field.Root>
 
@@ -330,7 +477,7 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
            <Textarea 
            resize="none" 
            h={200}
-           placeholder="Type here"  />
+           placeholder="Type here" ref={bioRef} />
          <Text
          fontWeight={'400'}
          fontSize={{base:12,md:14}}
@@ -343,11 +490,13 @@ export const CreateProfile = ({ isOpen, onClose,onFinish }) => {
           {/* Button */}
           <HStack>
            <Button 
-           onClick={onFinish}
+           onClick={handleCreateProfile}
            py={6} w={{base:'100%'}} 
            rounded={5}
            bg={'#2B362F'} >
-            Create Profile
+            {
+              loading?<Spinner/> :'Create Profile'
+            }
           </Button>
          </HStack>
          </Fieldset.Root>

@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+const navigate = useNavigate
 
 const axiosClient = axios.create({
     baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
@@ -17,7 +20,9 @@ return response;
     try {
         const {response} = error;
         if(response.status ===401){
-            localStorage.removeItem("ACCESS_TOKEN")
+            localStorage.removeItem("ACCESS_TOKEN");
+            
+            navigate('/login')
         } 
     } catch (error) {
         console.error(error)
