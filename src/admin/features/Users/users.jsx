@@ -33,7 +33,9 @@ export const UsersHome = () => {
                <Input py={25} fontSize={10} borderRadius={10} placeholder="Location" />
              </InputGroup>
               <Flex w={'100%'}  gap={3}  display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                  <Dropdown icon/>
+                  <Dropdown
+                  frameworks={frameworks}
+                  icon/>
                    
                   </Flex>
           </Stack>

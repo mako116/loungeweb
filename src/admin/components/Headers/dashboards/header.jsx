@@ -19,7 +19,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
     "/admin/users": "Users",
     "/admin/user-details": "User Details",
     "/admin/organization-details": "Organization Details",
-    "/admin/community": "Community",
+    "/admin/contents": "Contents",
     "/admin/settings": "Settings",
     "/admin/logout": "Logout",
   };

@@ -1,29 +1,30 @@
-import { Box, HStack, Image, Input, InputGroup, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Image, Input, InputGroup, Stack, Text } from '@chakra-ui/react'
 import { cardData } from '../../../hooks/useData'
 import { CiSearch } from 'react-icons/ci';
+import { RxDotsVertical } from 'react-icons/rx';
+import { CreateLink } from './Modal/CreateLink';
+import { useState } from 'react';
  
-export const Links = () => {
+export const AdminLinks = () => {
     const truncateTexts = (text, maxLength) => {
   if (!text) return "";
   return text.length <= maxLength ? text : text.substring(0, maxLength) + "...";
-};
+   };
+   
+     const [isOpen, setIsOpen] = useState(false);
+   
+      const handleCardClick = () => {
+     setIsOpen(true);
+  };
 
+  const handleClose = () => {
+    setIsOpen(false);
+   };
   return (
     <Box  h={'120%'} mb={'10%'}  p={5}>
-     <InputGroup
-      w={300}        
-      mt={-5}
-      mb={5}
-      startElement={<CiSearch size={15} />}
-     >
-     <Input
-      py={15}
-      fontSize={10}
-      borderRadius={10}
-      placeholder="Search..."
-     />
-     </InputGroup>
+     
     {cardData.map((card, idx) => (
+      <HStack>
         <Box w={{base:'100%',md:700}} 
         rounded={10} 
         my={4} 
@@ -52,10 +53,24 @@ export const Links = () => {
                     </Text>
                   </Stack>
              </HStack>
-       </Box>  
+       </Box> 
+        <Button
+      onClick={handleCardClick}
+       bg={'transparent'}
+       rounded={50}
+       p={0}
+       color={'#33333399'}
+       border={'1px solid #E4E4E4'}
+       >
+       <RxDotsVertical size={10}/>
+      </Button> 
+       </HStack>
      ))}
      
-     
+     <CreateLink
+     isOpen={isOpen}
+     onClose={handleClose}
+     />
     </Box>
      
   )

@@ -6,6 +6,7 @@ import {
   HStack,
   Image,
   Text,
+  Button,
 } from "@chakra-ui/react";
 
 export const ProfileDetailsModal = ({ isOpen, onClose, profile }) => {
@@ -87,6 +88,21 @@ export const ProfileDetailsModal = ({ isOpen, onClose, profile }) => {
                     {profile.date}
                   </Text>
                 </Stack>
+              </HStack>
+              <HStack justifyContent={'flex-end'}>
+                <Button
+                onClick={()=> onClose()}
+                  bg={'transparent'}
+                  color={'#33333399'}
+                  border={'1px solid #E4E4E4'}
+                >
+                 Remove Article 
+                </Button> 
+                <Button 
+                onClick={()=>onClose()}
+                px={{base:5,md:10}}>
+                  Cancel 
+                </Button>
               </HStack>
             </Stack>
           </Dialog.Content>

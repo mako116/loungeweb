@@ -30,15 +30,13 @@ import { AdminHome } from './admin/features/home/Homes';
 import { UsersHome } from './admin/features/Users/users';
 import { UserDetailsMain } from './admin/features/Users/userDetails/UserDetailsMain';
 import { OrganDetailsAdminMain } from './admin/features/Users/organizationDetails/OrganDetailsMain';
+import { AdminContent } from './admin/features/Contents/TopTabPanel';
 // import AdminProfileDetails from './admin/features/home/ProfileDetails';
 // import AdminPostHistory from './admin/features/home/postHistory';
  
 function App() {
-  // users
-  const Home = lazy(() => import("./user/features/home/Homes"));
+ const Home = lazy(() => import("./user/features/home/Homes"));
  
-  const [count, setCount] = useState(0)
-
   return (
     <BrowserRouter>
         <Suspense fallback={<Spinner />}>
@@ -97,6 +95,7 @@ function App() {
               <Route path="/admin/users" element={<UsersHome />} />
               <Route path="/admin/user-details" element={<UserDetailsMain />} />
               <Route path="/admin/organization-details" element={<OrganDetailsAdminMain />} />
+              <Route path="/admin/contents" element={<AdminContent />} />
 
             {/* Admin */}
             </Route>

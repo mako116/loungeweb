@@ -8,17 +8,22 @@ import {
   SimpleGrid,
   InputGroup,
   Input,
+  Button,
+  Menu,
+  Portal,
 } from "@chakra-ui/react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import btns from "../../../assets/btn.svg";
 import { cardData } from "../../../hooks/useData";
 import { ProfileDetailsModal } from "./profileDetails";
-// import { ProfileDetailsModal } from "./profileDetails";
-
-export const Articles = () => {
+import { BiDotsVerticalRounded, BiPencil, BiTrash } from "react-icons/bi";
+import { EditArticle } from "./Modal/EditArticle";
+ 
+export const AdminArticles = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -30,32 +35,26 @@ export const Articles = () => {
     setSelectedCard(null);
   };
 
+    const handleAction = () => {
+     setIsOpened(true);
+  };
+
+  const handleClosed = () => {
+    setIsOpened(false);
+   };
   return (
     <Box px={4} py={6}>
-      <InputGroup
-        w={300}
-        mt={-5}
-        mb={5}
-        startElement={<CiSearch size={15} />}
-      >
-        <Input
-          py={15}
-          fontSize={10}
-          borderRadius={10}
-          placeholder="Search..."
-        /> 
-      </InputGroup>
 
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6} gap={7}>
         {cardData.map((card, idx) => (
           <Box
             key={`${card.id}-${idx}`}
             cursor="pointer"
-            p={2}
+            p={3}
             bg="#fff"
             border="1px solid #080F340F"
             className="rounded-2xl relative"
-            onClick={() => handleCardClick(card)}
+           
           >
             <Image
               roundedTop={10}
@@ -64,49 +63,70 @@ export const Articles = () => {
               h="100px"
               className="w-full h-30 object-cover"
             />
-
-            <button className="absolute cursor-pointer top-5 right-6">
-              <Image src={btns} alt="btn" boxSize="20px" rounded="full" />
-            </button>
-
+            <Menu.Root >
+           <Menu.Trigger 
+           position={'absolute'}
+           right={5}
+            top={5}  asChild>
+            <Button 
+            p={0}
+            rounded={30}
+            bg={'#55555580'}  size="sm">
+             <BiDotsVerticalRounded size={10}/>
+            </Button>
+           </Menu.Trigger>
+          <Portal>
+           <Menu.Positioner>
+             <Menu.Content>
+              <Menu.Item 
+               onClick={() => handleAction()} 
+              value="new-txt">
+                <BiPencil/>
+                Edit
+              </Menu.Item>
+              <Menu.Item value="new-file">
+                <BiTrash/>
+                Delete
+              </Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+        </Menu.Root>
+          
             <Box pt={2} px={2}>
               <Text fontSize={{ base: 12, md: 14 }} className="font-semibold">
                 {card.title}
               </Text>
             </Box>
 
-            <HStack
+            <Button
+            bg={'transparent'}
+            color={'#212121'}
+            w={'100%'}
               pt={4}
-              pb={2}
+              pb={4}
               spacing={4}
-              align="center"
+               onClick={() => handleCardClick(card)}   
+              flexDirection={'row'}
+              // alignItems={'flex-start'}
               justifyContent="space-between"
               px={2}
             >
-              <HStack>
-                <Stack position="relative">
-                  <Image
-                    src={card.subimage}
-                    alt="Update"
-                    boxSize="30px"
-                    rounded="full"
-                  />
-                </Stack>
-                <Stack spacing={0}>
+                 
+                <Stack gap={1}  alignItems={'flex-start'}>
                   <Text
                     color="#202020"
                     fontSize={{ base: 10, md: 12 }}
                     fontFamily="InterMedium"
                   >
-                    The Lounge Team
+                    View Article
                   </Text>
                   <Text color="#202020" mt={-2} fontSize={{ base: 9, md: 11 }}>
                     {card.date}
                   </Text>
                 </Stack>
-              </HStack>
-              <MdKeyboardArrowRight />
-            </HStack>
+               <MdKeyboardArrowRight />
+            </Button>
           </Box> 
         ))}
       </SimpleGrid>
@@ -119,6 +139,12 @@ export const Articles = () => {
           profile={selectedCard}
         />
       )}
+
+         <EditArticle
+          isOpen={isOpened}
+          onClose={handleClosed}
+         />
+    
     </Box>
   );
 };
