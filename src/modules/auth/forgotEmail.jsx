@@ -14,48 +14,48 @@ import {
 } from "@chakra-ui/react";
  
 import LoungeLogo from "../../assets/Frame.png";
- import Google from "../../assets/google.png";
- import divder from "../../assets/Dividers.svg";
-import { BiHide, BiShow } from "react-icons/bi";
-import {useRequest} from '../../hooks/useRequest'
-import { toast } from "react-toastify";
+//  import Google from "../../assets/google.png";
+//  import divder from "../../assets/Dividers.svg";
+// import { BiHide, BiShow } from "react-icons/bi";
+// import {useRequest} from '../../hooks/useRequest'
+// import { toast } from "react-toastify";
 
 function ForgotEmail() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const {makeRequest, loading} = useRequest()
+  // const {makeRequest, loading} = useRequest()
   const [email, setEmail] = useState('')
  
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+//   useEffect(() => {
+//     const timer = setTimeout(() => setIsLoading(false), 2000);
+//     return () => clearTimeout(timer);
+//   }, []);
 
      const navigate = useNavigate()
 
     const handlePasswordPage = async() =>{
-      const res = await makeRequest('/check-email-exists', {email});
-      if(res.error) return;
-      toast.success('We have sent an OTP to your email. Use it to reset your password');
-    setTimeout(()=>{
-navigate("/reset-password")
-    }, 2000)
+//       const res = await makeRequest('/check-email-exists', {email});
+//       if(res.error) return;
+//       toast.success('We have sent an OTP to your email. Use it to reset your password');
+//     setTimeout(()=>{
+        navigate("/reset-password")
+//     }, 2000)
      
 
     }
-  if (isLoading) {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        h="100vh"
-        w="full"
-        color="#0A2EE2"
-      >
-        <Spinner size="xl" thickness="4px" speed="0.65s" />
-      </Flex>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Flex
+  //       align="center"
+  //       justify="center"
+  //       h="100vh"
+  //       w="full"
+  //       color="#0A2EE2"
+  //     >
+  //       <Spinner size="xl" thickness="4px" speed="0.65s" />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex minH={{base:"100vh",lg:'100%'}} w="full" fontFamily="Poppins" overflow="hidden">
@@ -99,10 +99,13 @@ navigate("/reset-password")
          
       </Fieldset.Content>
 
-      <Button  fontFamily={'inter'}  onClick={handlePasswordPage} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-{
+      <Button  fontFamily={'inter'}  
+      onClick={handlePasswordPage} 
+      alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+{/* {
   loading? <Spinner/>:'send'
-} 
+}  */}
+Send
       </Button>
        </Fieldset.Root>
       </Flex>

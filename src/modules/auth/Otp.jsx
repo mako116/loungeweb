@@ -13,19 +13,19 @@ import {
   Spinner,
   PinInput,
 } from "@chakra-ui/react";
- import {AuthContext} from '../../context/AuthContext'
+//  import {AuthContext} from '../../context/AuthContext'
 import LoungeLogo from "../../assets/Frame.png";
-import {useRequest} from '../../hooks/useRequest'
-import { toast } from "react-toastify";
+// import {useRequest} from '../../hooks/useRequest'
+// import { toast } from "react-toastify";
 import { useRef } from "react";
 function Otp() {
    const [isLoading, setIsLoading] = useState(true);
 
-   const navigate = useNavigate()
+  //  const navigate = useNavigate()
   
- const {userDetails} = useContext(AuthContext)
+//  const {userDetails} = useContext(AuthContext)
 
- const {makeRequest, loading} = useRequest();
+//  const {makeRequest, loading} = useRequest();
 const otpRef = useRef('');
 
   useEffect(() => {
@@ -33,59 +33,59 @@ const otpRef = useRef('');
     return () => clearTimeout(timer);
   }, []);
 
-  const handleResendCode = async ()=>{
+//   const handleResendCode = async ()=>{
 
-    const res = await makeRequest('/resend-email-otp',{
-      email: userDetails?.email
-    });
+//     const res = await makeRequest('/resend-email-otp',{
+//       email: userDetails?.email
+//     });
 
-    toast.success(res.response.message);
-  }
-function maskEmail(email) {
-  let [username, domain] = email.split("@");
+//     toast.success(res.response.message);
+//   }
+// function maskEmail(email) {
+//   let [username, domain] = email.split("@");
 
-  if (username.length > 5) {
-    // Keep first 5 characters, replace the rest with *
-    username = username.substring(0, 5) + "*".repeat(username.length - 5);
-  } else {
-    // If username is shorter, just keep first character
-    username = username[0] + "*".repeat(username.length - 1);
-  }
+//   if (username.length > 5) {
+//     // Keep first 5 characters, replace the rest with *
+//     username = username.substring(0, 5) + "*".repeat(username.length - 5);
+//   } else {
+//     // If username is shorter, just keep first character
+//     username = username[0] + "*".repeat(username.length - 1);
+//   }
 
-  return `${username}@${domain}`;
-}
+//   return `${username}@${domain}`;
+// }
   const handleVerifyOtp = async() =>{
        
-    if(otpRef.current.length < 4){
-      return toast.error("Please enter a valid 4-digit code");  
-    }
-    const res = await makeRequest('/verify-email', {
-      code: Number(otpRef.current)
-    });
+//     if(otpRef.current.length < 4){
+//       return toast.error("Please enter a valid 4-digit code");  
+//     }
+//     const res = await makeRequest('/verify-email', {
+//       code: Number(otpRef.current)
+//     });
     
-    if(res.error) return;
+//     if(res.error) return;
    
-    toast.success(res.response.message);
-    setTimeout(()=>{
+//     toast.success(res.response.message);
+//     setTimeout(()=>{
  navigate('/login');
-    }, 2000);
+//     }, 2000);
    
 
   }
 
-  if (isLoading) {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        h="100vh"
-        w="full"
-        color="#0A2EE2"
-      >
-        <Spinner size="xl" thickness="4px" speed="0.65s" />
-      </Flex>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Flex
+  //       align="center"
+  //       justify="center"
+  //       h="100vh"
+  //       w="full"
+  //       color="#0A2EE2"
+  //     >
+  //       <Spinner size="xl" thickness="4px" speed="0.65s" />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex minH={{base:"100vh",lg:'100%'}} w="full" fontFamily="Poppins" overflow="hidden">
@@ -122,7 +122,7 @@ function maskEmail(email) {
                   fontFamily={'inter'} 
                   fontSize={{base:12,md:14}}
                   color={'#645D5D'} >
-                  Enter code sent to {userDetails ? maskEmail(userDetails.email) : 'your email'}
+                  {/* Enter code sent to {userDetails ? maskEmail(userDetails.email) : 'your email'} */}
              </Text>
           </Flex>
           </Stack>
@@ -153,7 +153,7 @@ function maskEmail(email) {
         <Box
          as={RouterLink}
           to={'#'}
-          onClick={handleResendCode}
+          // onClick={handleResendCode}
          fontWeight={'600'} 
           fontSize={{base:12,md:14}}
             fontFamily={'inter'}  
@@ -164,10 +164,13 @@ function maskEmail(email) {
                Resend Code
            </Box>
          </Text>
-         <Button  fontFamily={'inter'}  maxW={'70%'} mx={'auto'} onClick={handleVerifyOtp} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        {
+         <Button  fontFamily={'inter'}  maxW={'70%'} mx={'auto'} 
+         onClick={handleVerifyOtp} 
+         alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {/* {
           loading ? <Spinner size="md" thickness="4px" speed="0.65s" color="white" /> : "Verify Account"    
-        }
+        } */}
+        Verify Account
       </Button>
       </Fieldset.Root>
       </Flex>

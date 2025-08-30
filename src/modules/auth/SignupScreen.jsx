@@ -26,65 +26,66 @@ import { AuthContext } from "../../context/AuthContext";
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const nameRef = React.useRef();
-  const {loading, success, error, makeRequest} = useRequest()
-  const emailRef = React.useRef();
-  const {setUserDetails} = useContext(AuthContext);
-  const passwordRef = React.useRef();
-  const navigate = useNavigate()
+  // const nameRef = React.useRef();
+  // const {loading, success, error, makeRequest} = useRequest()
+  // const emailRef = React.useRef();
+  // const {setUserDetails} = useContext(AuthContext);
+  // const passwordRef = React.useRef();
+//   const navigate = useNavigate()
 
-  useEffect(() => {
+//   useEffect(() => {
     
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+//     const timer = setTimeout(() => setIsLoading(false), 2000);
+//     return () => clearTimeout(timer);
+//   }, []);
 
   const handleSignup = async () =>{
-    if(!nameRef.current.value || !emailRef.current.value || !passwordRef.current.value){
+    navigate('/otp')
+//     if(!nameRef.current.value || !emailRef.current.value || !passwordRef.current.value){
      
-       toast.error('All fields are required')
+//        toast.error('All fields are required')
       
-      return;
-    }
-try {
-      const res = await makeRequest('/register', {
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value
-    })
+//       return;
+//     }
+// try {
+//       const res = await makeRequest('/register', {
+//       name: nameRef.current.value,
+//       email: emailRef.current.value,
+//       password: passwordRef.current.value
+//     })
 
-    if(res.response){
-      toast.success(res.response.message);
-      setUserDetails(res.response.user);
-      setTimeout(()=>{
-return navigate('/otp');
-      }, 2000);
+//     if(res.response){
+//       toast.success(res.response.message);
+//       setUserDetails(res.response.user);
+//       setTimeout(()=>{
+// return navigate('/otp');
+//       }, 2000);
       
-    }
+//     }
 
-} catch (error) {
-  console.log(error);
-  toast.error('Server Error')
-}
+// } catch (error) {
+//   console.log(error);
+//   toast.error('Server Error')
+// }
 
 
    
 
     
   }
-  if (isLoading) {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        h="100vh"
-        w="full"
-        color="#0A2EE2"
-      >
-        <Spinner size="xl" thickness="4px" speed="0.65s" />
-      </Flex>
-    );
-  }
+//   if (isLoading) {
+//     return (
+//       <Flex
+//         align="center"
+//         justify="center"
+//         h="100vh"
+//         w="full"
+//         color="#0A2EE2"
+//       >
+//         <Spinner size="xl" thickness="4px" speed="0.65s" />
+//       </Flex>
+//     );
+//   }
 
   return (
     <Flex minH={{base:"100vh",lg:'100%'}} w="full" fontFamily="Poppins" overflow="hidden">
@@ -194,11 +195,15 @@ return navigate('/otp');
         
       </Fieldset.Content>
 
-      <Button disabled={loading}  fontFamily={'inter'}  onClick={handleSignup} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        {
+      <Button 
+      // disabled={loading}  
+      fontFamily={'inter'}  
+      onClick={handleSignup} 
+      alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {/* {
         loading ? <Spinner /> :  'Sign up'
-        }
-       
+        } */}
+       Sign up
       </Button>
         <Text 
             lineHeight={'40px'}

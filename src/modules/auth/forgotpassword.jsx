@@ -13,62 +13,62 @@ import {
 } from "@chakra-ui/react";
  
 import LoungeLogo from "../../assets/Frame.png";
- import Google from "../../assets/google.png";
- import divder from "../../assets/Dividers.svg";
- import { useRequest } from "../../hooks/useRequest";
+//  import Google from "../../assets/google.png";
+//  import divder from "../../assets/Dividers.svg";
+//  import { useRequest } from "../../hooks/useRequest";
 import { BiHide, BiShow } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const {makeRequest, loading} = useRequest()
+  // const {makeRequest, loading} = useRequest()
 const passwordRef = useRef('')
 
   const otpRef = useRef('');
   const emailRef = useRef('')
  
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setIsLoading(false), 2000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
      const navigate = useNavigate()
 
 
     const handleReset = async () =>{
-      if(!emailRef.current.value || !otpRef.current || !passwordRef.current.value){
-        return toast.error('All fields are required');
-      }
-      const res = await makeRequest('/reset-password', {
-        email:emailRef.current.value,
-        otp: otpRef.current,
-        password: passwordRef.current.value
-      })
-    //  navigate("/login")
+    //   if(!emailRef.current.value || !otpRef.current || !passwordRef.current.value){
+    //     return toast.error('All fields are required');
+    //   }
+    //   const res = await makeRequest('/reset-password', {
+    //     email:emailRef.current.value,
+    //     otp: otpRef.current,
+    //     password: passwordRef.current.value
+    //   })
+     navigate("/login")
    
-    if(res.error) return;
+    // if(res.error) return;
 
-    toast.success(res.response.message);
+    // toast.success(res.response.message);
 
-    setTimeout(()=>{
-      navigate('/login');
-    }, 2000);
+    // setTimeout(()=>{
+    //   navigate('/login');
+    // }, 2000);
 
     }
-  if (isLoading) {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        h="100vh"
-        w="full"
-        color="#0A2EE2"
-      >
-        <Spinner size="xl" thickness="4px" speed="0.65s" />
-      </Flex>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Flex
+  //       align="center"
+  //       justify="center"
+  //       h="100vh"
+  //       w="full"
+  //       color="#0A2EE2"
+  //     >
+  //       <Spinner size="xl" thickness="4px" speed="0.65s" />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex minH={{base:"100vh",lg:'100%'}} w="full" fontFamily="Poppins" overflow="hidden">
@@ -163,10 +163,13 @@ const passwordRef = useRef('')
         </Field.Root>
       </Fieldset.Content>
 
-      <Button  fontFamily={'inter'}  onClick={handleReset} alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        {
+      <Button  fontFamily={'inter'}  
+      onClick={handleReset} 
+      alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {/* {
           loading? <Spinner/>:'Send'
-        }
+        } */}
+        Send
       </Button>
        </Fieldset.Root>
       </Flex>

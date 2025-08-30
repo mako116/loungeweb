@@ -17,17 +17,17 @@ import LoungeLogo from "../../assets/Frame.png";
  import Google from "../../assets/google.png";
  import divder from "../../assets/Dividers.svg";
 import { BiHide, BiShow } from "react-icons/bi";
-import { useRequest } from "../../hooks/useRequest";
-import { toast } from "react-toastify";
-import { AuthContext } from "../../context/AuthContext";
+// import { useRequest } from "../../hooks/useRequest";
+// import { toast } from "react-toastify";
+// import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const emailRef = useRef('');
-  const {makeRequest, loading} = useRequest();
-  const { setUserDetails} = useContext(AuthContext)
-  const passwordRef = useRef('')
+  // const {makeRequest, loading} = useRequest();
+  // const { setUserDetails} = useContext(AuthContext)
+  // const passwordRef = useRef('')
  const navigate = useNavigate()
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
@@ -35,38 +35,38 @@ function Login() {
   }, []);
 
   const handleLogin = async () =>{
-    if(!emailRef.current.value || !passwordRef.current.value){
-      return toast.error('All fields are required');
-    }
-    const res = await makeRequest('/login', {
-      email: emailRef.current.value,
-      password:passwordRef.current.value
-    })
+//     if(!emailRef.current.value || !passwordRef.current.value){
+//       return toast.error('All fields are required');
+//     }
+//     const res = await makeRequest('/login', {
+//       email: emailRef.current.value,
+//       password:passwordRef.current.value
+//     })
 
-    localStorage.setItem("ACCESS_TOKEN", res.response.token);
-    setUserDetails(res.response.user);
-    toast.success('Login Successful');
+//     localStorage.setItem("ACCESS_TOKEN", res.response.token);
+//     setUserDetails(res.response.user);
+//     toast.success('Login Successful');
 
-    setTimeout(()=>{
+//     setTimeout(()=>{
 navigate("/dashboard")
-    }, 2000);
+//     }, 2000);
 
     
   }
 
-  if (isLoading) {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        h="100vh"
-        w="full"
-        color="#0A2EE2"
-      >
-        <Spinner size="xl" thickness="4px" speed="0.65s" />
-      </Flex>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Flex
+  //       align="center"
+  //       justify="center"
+  //       h="100vh"
+  //       w="full"
+  //       color="#0A2EE2"
+  //     >
+  //       <Spinner size="xl" thickness="4px" speed="0.65s" />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex minH={{base:"100vh",lg:'100%'}} w="full" fontFamily="Poppins" overflow="hidden">
@@ -131,7 +131,7 @@ navigate("/dashboard")
           <Input 
           name="email" 
           type="email"
-          ref={emailRef} 
+          // ref={emailRef} 
           py={{base:3,md:7}} />
         </Field.Root>
 
@@ -145,7 +145,7 @@ navigate("/dashboard")
           <Input 
           name="password" 
           position={'relative'}
-          ref={passwordRef}
+          // ref={passwordRef}
            type={showPassword ? "text" : "password"}
            py={{base:3,md:7}} 
             />
@@ -167,10 +167,13 @@ navigate("/dashboard")
         
       </Fieldset.Content>
 
-      <Button  fontFamily={'inter'} onClick={handleLogin}  alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
-        {
+      <Button  fontFamily={'inter'} 
+      onClick={handleLogin}  
+      alignSelf="flex-start" w={'100%'} py={7} rounded={5}>
+        {/* {
           loading? <Spinner/>:'Login'
-        }
+        } */}
+        Login
       </Button>
         <Text 
             lineHeight={'40px'}
