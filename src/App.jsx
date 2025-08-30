@@ -50,9 +50,9 @@ function App() {
             <Route
             path='/'
               element={
-                 <ProtectedRoute>
+                //  <ProtectedRoute>
                   <AppLayout />
-                 </ProtectedRoute>
+                //  </ProtectedRoute>
               } 
             >
               <Route path="/dashboard" index element={<Homes />} />
@@ -65,8 +65,7 @@ function App() {
               <Route path="/community" element={<Community />} />
               <Route path="/settings" element={<SettingsTab />} />
 
-            {/* Admin */}
-            </Route>
+             </Route>
 
             {/* Organization */}
             <Route
