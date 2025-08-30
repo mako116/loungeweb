@@ -44,7 +44,7 @@ function App() {
  
   return (
     <BrowserRouter>
-        <Suspense fallback={<Spinner />}>
+        {/* <Suspense fallback={<Spinner />}> */}
          
           <Routes>
             <Route
@@ -116,7 +116,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotEmail />} />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
-        </Suspense>
+        {/* </Suspense> */}
       </BrowserRouter>
   )
 }
