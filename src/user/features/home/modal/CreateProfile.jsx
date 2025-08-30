@@ -161,7 +161,8 @@ onFinish();
               <Stack mx={'auto'} position={'relative'}>
                 
               <Image
-        src={preview || userDetails?.profile_picture ||logo} // fallback to default image
+                      src={logo} // fallback to default image
+        // src={preview || userDetails?.profile_picture ||logo} // fallback to default image
         alt="Profile Image"
         boxSize={{ base: "70px", md: "100px" }}
         borderRadius="full"
@@ -173,7 +174,7 @@ onFinish();
       <input
         type="file"
         accept="image/*"
-        ref={fileInputRef}
+        // ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleFileChange}
       />
@@ -190,7 +191,9 @@ onFinish();
            fontFamily="InterMedium"
            color={'#101928'} > First Name</Field.Label>
            <InputGroup startElement={<CiUser />}>
-             <Input  py={6}  placeholder="First Name" ref={firstNameRef}/>
+             <Input  py={6}  placeholder="First Name" 
+            //  ref={firstNameRef}
+             />
          </InputGroup>
         </Field.Root>
 

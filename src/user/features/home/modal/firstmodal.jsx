@@ -11,8 +11,8 @@ import {
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 export const FirstModal = ({ isOpen, onClose,onStartCreating  }) => {
- const {userDetails} = useContext(AuthContext);
- console.log("userDetails",userDetails);
+//  const {userDetails} = useContext(AuthContext);
+//  console.log("userDetails",userDetails);
   return (
     <Dialog.Root open={isOpen}  >
       <Portal >
@@ -52,7 +52,8 @@ export const FirstModal = ({ isOpen, onClose,onStartCreating  }) => {
         </Text>
         </Fieldset.Content>
           {/* Button */}
-            <Button mx={'auto'} onClick={onStartCreating} 
+            <Button mx={'auto'} 
+            onClick={onStartCreating} 
              p={7}  
              fontSize={{base:17,md:20}}
              rounded={10}
